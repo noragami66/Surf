@@ -39,7 +39,7 @@ CHANGELOG.md        — журнал изменений (формат Keep a Cha
 ## Документация
 
 - [CHANGELOG](CHANGELOG.md)
-- [Промпты (AI)](prompts/) — все промпты по этапам
+- [Промпты (AI)](prompts/README.md) — все промпты по этапам
 - [README аналитики](docs/01-analysis/README.md)
 - [Модель данных](docs/01-analysis/3-design/data-model.md)
 - [API-контракт](docs/01-analysis/3-design/api-contract.md)
