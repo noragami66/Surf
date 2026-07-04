@@ -47,6 +47,9 @@ reference the same id.
 
 ### Fixed
 
+- Schedule stale `free_seats` after booking/cancel — auto `RefreshSlotsEvent` ([PLATF-017](docs/bugs/bug-01-stale-slots-after-booking.md))
+- My Bookings list not cleared on logout — `ResetMyBookingsEvent` via auth listener ([PLATF-018](docs/bugs/bug-02-stale-bookings-after-logout.md))
+- Early/late cancel window used truncated `inMinutes` — compare full `Duration` ([PLATF-019](docs/bugs/bug-03-cancel-window-truncation.md))
 - Slot detail «Записаться» navigation: absolute route `/slots/:id/book` instead of relative push ([PLATF-015](app/))
 
 ### Removed
@@ -70,4 +73,7 @@ reference the same id.
 | PLATF-013 | `00cfc1c` | UI polish: mesh gradient, card surfaces, home header, docked nav |
 | PLATF-014 | `28e10c7` | Slot detail screen, booking flow, mock repo, tests |
 | PLATF-015 | `1417f5d` | My bookings list, detail, cancel flow |
-| PLATF-016 | — | Tests expansion, logout, pull-to-refresh, quality docs |
+| PLATF-016 | `1ae73c4` | Tests expansion, logout, pull-to-refresh, quality docs |
+| PLATF-017 | — | Fix stale slots after booking/cancel |
+| PLATF-018 | — | Fix stale my bookings after logout |
+| PLATF-019 | — | Fix cancellation window Duration comparison |
