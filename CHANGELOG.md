@@ -63,4 +63,4 @@ reference the same id.
 | PLATF-011 | — | Handoff doc for stage 4 continuation |
 | PLATF-012 | — | Auth OTP flow: bloc, screens, router guard, secure session, tests |
 | PLATF-013 | `00cfc1c` | UI polish: mesh gradient, card surfaces, home header, docked nav |
-| PLATF-014 | — | Slot detail screen, booking flow, mock repo, tests |
+| PLATF-014 | `28e10c7` | Slot detail screen, booking flow, mock repo, tests |
