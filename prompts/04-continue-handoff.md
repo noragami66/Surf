@@ -12,7 +12,7 @@
 GitHub: https://github.com/noragami66/Surf.git (ветка main, всё запушено).
 
 ## Правила работы
-- После каждого завершённого действия агента: **commit + push** с префиксом **PLATF-XXX** (следующий — PLATF-011).
+- После каждого завершённого действия агента: **commit + push** с префиксом **PLATF-XXX** (следующий — **PLATF-012**).
 - Обновляй CHANGELOG.md.
 - Архитектура: Clean Architecture (4 слоя) — domain / data / application / presentation.
 - Цепочка: Widget → BLoC → I_Service → ServiceImpl → I_Repository → RepositoryImpl.
@@ -75,7 +75,7 @@ GitHub: https://github.com/noragami66/Surf.git (ветка main, всё запу
    - Mock: AuthRepositoryMock (код 1234 или из контракта)
    - SecureTokenStorage для access/refresh
 4. flutter analyze + flutter test — без issues.
-5. Commit PLATF-011 + push + CHANGELOG.
+5. Commit PLATF-012 + push + CHANGELOG.
 
 Не трогай booking/my_bookings beyond router integration — это этапы 5–6.
 ```
@@ -85,8 +85,8 @@ GitHub: https://github.com/noragami66/Surf.git (ветка main, всё запу
 ## Краткая шпаргалка для агента
 
 ```
-PLATF-011 → Auth (OTP + session)
-PLATF-012 → Slot detail + Booking flow
-PLATF-013 → My bookings (list, detail, cancel)
-PLATF-014+ → Tests, dev_panel, intentional bugs (этап 7)
+PLATF-012 → Auth (OTP + session)
+PLATF-013 → Slot detail + Booking flow
+PLATF-014 → My bookings (list, detail, cancel)
+PLATF-015+ → Tests, dev_panel, intentional bugs (этап 7)
 ```
