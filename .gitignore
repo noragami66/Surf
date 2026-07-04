@@ -1,0 +1,17 @@
+# Dart / Flutter
+.dart_tool/
+.packages
+build/
+*.iml
+.idea/
+pubspec.lock
+
+# macOS
+.DS_Store
+
+# Env
+.env
+*.env
+
+# Coverage
+coverage/
