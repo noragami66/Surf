@@ -59,6 +59,17 @@ class AppLocalizationsRu extends AppLocalizations {
       'Выберите занятие в расписании и забронируйте место';
 
   @override
+  String get myBookingsGoToSchedule => 'Перейти к расписанию';
+
+  @override
+  String homeGreeting(String name) {
+    return 'Привет, $name';
+  }
+
+  @override
+  String get homeGreetingSubtitle => 'Рады видеть вас снова';
+
+  @override
   String get loading => 'Загрузка…';
 
   @override

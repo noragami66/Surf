@@ -43,6 +43,7 @@ class _GlinaAppState extends State<GlinaApp> {
         ),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'Glina',
         theme: buildAppTheme(),
         themeMode: ThemeMode.dark,

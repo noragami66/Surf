@@ -20,6 +20,16 @@
   "myBookingsSubtitle": "Ваши бронирования и история",
   "myBookingsEmptyTitle": "Записей пока нет",
   "myBookingsEmptySubtitle": "Выберите занятие в расписании и забронируйте место",
+  "myBookingsGoToSchedule": "Перейти к расписанию",
+  "homeGreeting": "Привет, {name}",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeGreetingSubtitle": "Рады видеть вас снова",
   "loading": "Загрузка…",
   "authPhoneTitle": "Добро пожаловать в Глину",
   "authPhoneSubtitle": "Введите номер телефона, чтобы войти или создать аккаунт",

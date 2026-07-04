@@ -26,6 +26,16 @@
   "myBookingsSubtitle": "Your bookings and history",
   "myBookingsEmptyTitle": "No bookings yet",
   "myBookingsEmptySubtitle": "Pick a workshop from the schedule to book a spot",
+  "myBookingsGoToSchedule": "Go to schedule",
+  "homeGreeting": "Hello, {name}",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeGreetingSubtitle": "Glad to see you again",
   "loading": "Loading…",
   "authPhoneTitle": "Welcome to Glina",
   "@authPhoneTitle": {

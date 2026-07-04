@@ -27,7 +27,7 @@ class AuthErrorText extends StatelessWidget {
         children: [
           const Icon(
             Icons.error_outline_rounded,
-            color: Palette.ember,
+            color: Palette.textSecondary,
             size: 16,
           ),
           const SizedBox(width: 8),
@@ -35,7 +35,7 @@ class AuthErrorText extends StatelessWidget {
             child: Text(
               message,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Palette.ember,
+                color: Palette.textSecondary,
                 fontSize: 13,
               ),
             ),

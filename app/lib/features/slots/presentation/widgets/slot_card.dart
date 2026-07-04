@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glina/core/style/palette.dart';
 import 'package:glina/core/widgets/glass_container.dart';
+import 'package:glina/core/widgets/glass_icon_badge.dart';
 import 'package:glina/features/slots/domain/entities/slot_entity.dart';
 import 'package:glina/features/slots/domain/enums/slot_enums.dart';
 import 'package:glina/l10n/app_localizations.dart';
@@ -58,7 +59,7 @@ class SlotCard extends StatelessWidget {
               Text(
                 priceFormat.format(slot.priceAmount),
                 style: theme.textTheme.labelLarge?.copyWith(
-                  color: Palette.ember,
+                  color: Palette.textPrimary,
                   fontSize: 15,
                 ),
               ),
@@ -111,22 +112,8 @@ class _ProgramBadge extends StatelessWidget {
       ProgramType.wheel => Icons.album_outlined,
     };
 
-    return Container(
-      width: 44,
-      height: 44,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Palette.ember.withValues(alpha: 0.35),
-            Palette.clayGlow.withValues(alpha: 0.15),
-          ],
-        ),
-        border: Border.all(color: Palette.glassBorder),
-      ),
-      child: Icon(icon, color: Palette.ember, size: 22),
+    return GlassIconBadge(
+      child: Icon(icon, color: Palette.textSecondary, size: 22),
     );
   }
 }
@@ -142,9 +129,9 @@ class _MetaChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.04),
+        color: Palette.cardFill,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Palette.glassBorder.withValues(alpha: 0.6)),
+        border: Border.all(color: Palette.cardBorder),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

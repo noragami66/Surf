@@ -58,6 +58,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Pick a workshop from the schedule to book a spot';
 
   @override
+  String get myBookingsGoToSchedule => 'Go to schedule';
+
+  @override
+  String homeGreeting(String name) {
+    return 'Hello, $name';
+  }
+
+  @override
+  String get homeGreetingSubtitle => 'Glad to see you again';
+
+  @override
   String get loading => 'Loading…';
 
   @override

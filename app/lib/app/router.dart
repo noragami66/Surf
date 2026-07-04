@@ -115,7 +115,6 @@ class _HomeShell extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      extendBody: true,
       backgroundColor: Colors.transparent,
       body: Stack(
         fit: StackFit.expand,
@@ -128,7 +127,7 @@ class _HomeShell extends StatelessWidget {
           GlassNavDestination(
             icon: Icons.calendar_month_outlined,
             selectedIcon: Icons.calendar_month,
-            label: l10n.slotsTab,
+            label: l10n.slotsSectionTitle,
           ),
           GlassNavDestination(
             icon: Icons.event_note_outlined,

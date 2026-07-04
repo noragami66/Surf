@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glina/core/widgets/glass_primary_button.dart';
 import 'package:glina/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
 import 'package:glina/features/auth/presentation/widgets/auth_error_text.dart';
 import 'package:glina/features/auth/presentation/widgets/auth_scaffold.dart';
-import 'package:glina/features/auth/presentation/widgets/glass_primary_button.dart';
 import 'package:glina/features/auth/presentation/widgets/glass_text_field.dart';
 import 'package:glina/l10n/app_localizations.dart';
 

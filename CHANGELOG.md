@@ -24,6 +24,7 @@ reference the same id.
 
 ### Added
 
+- UI polish: mesh-gradient ambient background, black card surfaces with `cardBorder`, `HomeUserHeader` greeting, shared `GlassPrimaryButton` / `GlassEmptyState` / `GlassIconBadge`, docked full-width bottom nav with labels, l10n home greeting strings ([PLATF-013](app/))
 - (dev) Initial MVP analytics for «Глина»: customer brief, elicitation, user stories, FR/BR/NFR, use cases, prompts, task doc, git init ([PLATF-001](docs/tasks/task-00-mvp-analysis.md))
 - (dev) Architecture phase: data model, API contract, Flutter Clean Architecture plan ([PLATF-004](docs/tasks/task-01-architecture.md))
 - Flutter bootstrap: `app/` project, Clean Architecture skeleton, slots empty-state slice ([PLATF-009](docs/tasks/task-02-flutter-bootstrap.md))
@@ -60,3 +61,4 @@ reference the same id.
 | PLATF-010 | — | Dark glassmorphism design system |
 | PLATF-011 | — | Handoff doc for stage 4 continuation |
 | PLATF-012 | — | Auth OTP flow: bloc, screens, router guard, secure session, tests |
+| PLATF-013 | — | UI polish: mesh gradient, card surfaces, home header, docked nav |

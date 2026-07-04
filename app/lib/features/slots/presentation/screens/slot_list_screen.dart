@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glina/core/style/app_theme_extensions.dart';
 import 'package:glina/core/style/palette.dart';
-import 'package:glina/core/widgets/glass_container.dart';
+import 'package:glina/core/widgets/glass_empty_state.dart';
+import 'package:glina/core/widgets/home_user_header.dart';
 import 'package:glina/features/slots/presentation/manager/slots_bloc/slots_bloc.dart';
 import 'package:glina/features/slots/presentation/widgets/slot_card.dart';
 import 'package:glina/l10n/app_localizations.dart';
@@ -12,7 +14,7 @@ class SlotListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final theme = Theme.of(context);
+    final glass = GlassThemeExtension.of(context);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -25,32 +27,22 @@ class SlotListScreen extends StatelessWidget {
               slivers: [
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+                    padding: EdgeInsets.fromLTRB(
+                      glass.screenPaddingH,
+                      glass.screenPaddingTop,
+                      glass.screenPaddingH,
+                      0,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          l10n.appTitle,
-                          style: theme.textTheme.headlineLarge,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          l10n.appTagline,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            color: Palette.textMuted,
-                            fontSize: 14,
-                          ),
+                        const HomeUserHeader(),
+                        SizedBox(height: glass.sectionGap),
+                        ScreenPageHeader(
+                          title: l10n.slotsSectionTitle,
+                          subtitle: l10n.appTagline,
                         ),
                       ],
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
-                    child: Text(
-                      l10n.slotsSectionTitle,
-                      style: theme.textTheme.headlineSmall,
                     ),
                   ),
                 ),
@@ -62,13 +54,19 @@ class SlotListScreen extends StatelessWidget {
                   ),
                   SlotsStatus.empty => SliverFillRemaining(
                     hasScrollBody: false,
-                    child: _EmptyState(
+                    child: GlassEmptyState(
+                      icon: Icons.calendar_month_outlined,
                       title: l10n.slotsEmptyTitle,
                       subtitle: l10n.slotsEmptySubtitle,
                     ),
                   ),
                   SlotsStatus.loaded => SliverPadding(
-                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 120),
+                    padding: EdgeInsets.fromLTRB(
+                      glass.screenPaddingH,
+                      16,
+                      glass.screenPaddingH,
+                      16,
+                    ),
                     sliver: SliverList.separated(
                       itemCount: state.slots.length,
                       separatorBuilder: (_, __) => const SizedBox(height: 0),
@@ -79,7 +77,8 @@ class SlotListScreen extends StatelessWidget {
                   ),
                   SlotsStatus.failure => SliverFillRemaining(
                     hasScrollBody: false,
-                    child: _EmptyState(
+                    child: GlassEmptyState(
+                      icon: Icons.cloud_off_outlined,
                       title: l10n.slotsErrorTitle,
                       subtitle: state.errorMessage ?? l10n.slotsErrorSubtitle,
                     ),
@@ -102,80 +101,20 @@ class _LoadingState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: GlassContainer(
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 28),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(
-              width: 28,
-              height: 28,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                color: Palette.ember,
-              ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(
+            width: 28,
+            height: 28,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              color: Palette.textPrimary,
             ),
-            const SizedBox(height: 16),
-            Text(message, style: Theme.of(context).textTheme.bodyLarge),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _EmptyState extends StatelessWidget {
-  const _EmptyState({required this.title, required this.subtitle});
-
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Center(
-        child: GlassContainer(
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 36),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 72,
-                height: 72,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: RadialGradient(
-                    colors: [
-                      Palette.ember.withValues(alpha: 0.35),
-                      Palette.ember.withValues(alpha: 0.05),
-                    ],
-                  ),
-                  border: Border.all(color: Palette.glassBorder),
-                ),
-                child: const Icon(
-                  Icons.calendar_month_outlined,
-                  color: Palette.ember,
-                  size: 32,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.headlineSmall?.copyWith(fontSize: 18),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                subtitle,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.bodyLarge?.copyWith(fontSize: 14),
-              ),
-            ],
           ),
-        ),
+          const SizedBox(height: 16),
+          Text(message, style: Theme.of(context).textTheme.bodyLarge),
+        ],
       ),
     );
   }

@@ -56,7 +56,7 @@ class GlassTextField extends StatelessWidget {
             maxLength: maxLength,
             onSubmitted: onSubmitted,
             style: theme.textTheme.headlineSmall?.copyWith(fontSize: 18),
-            cursorColor: Palette.ember,
+            cursorColor: Palette.textPrimary,
             decoration: InputDecoration(
               counterText: '',
               hintText: hint,

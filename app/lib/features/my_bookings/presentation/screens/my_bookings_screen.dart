@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:glina/core/style/palette.dart';
-import 'package:glina/core/widgets/glass_container.dart';
+import 'package:glina/core/style/app_theme_extensions.dart';
+import 'package:glina/core/widgets/glass_empty_state.dart';
+import 'package:glina/core/widgets/home_user_header.dart';
 import 'package:glina/l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 class MyBookingsScreen extends StatelessWidget {
   const MyBookingsScreen({super.key});
@@ -9,77 +11,47 @@ class MyBookingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final theme = Theme.of(context);
+    final glass = GlassThemeExtension.of(context);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
         bottom: false,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 16, 24, 120),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                l10n.myBookingsTab,
-                style: theme.textTheme.headlineLarge?.copyWith(fontSize: 28),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                glass.screenPaddingH,
+                glass.screenPaddingTop,
+                glass.screenPaddingH,
+                0,
               ),
-              const SizedBox(height: 8),
-              Text(
-                l10n.myBookingsSubtitle,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: Palette.textMuted,
-                  fontSize: 14,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const HomeUserHeader(),
+                  SizedBox(height: glass.sectionGap),
+                  ScreenPageHeader(
+                    title: l10n.myBookingsTab,
+                    subtitle: l10n.myBookingsSubtitle,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: GlassEmptyState(
+                  icon: Icons.event_busy_outlined,
+                  title: l10n.myBookingsEmptyTitle,
+                  subtitle: l10n.myBookingsEmptySubtitle,
+                  actionLabel: l10n.myBookingsGoToSchedule,
+                  onAction: () => context.go('/slots'),
                 ),
               ),
-              const Spacer(),
-              GlassContainer(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 28,
-                  vertical: 36,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 72,
-                      height: 72,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: RadialGradient(
-                          colors: [
-                            Palette.clayGlow.withValues(alpha: 0.35),
-                            Palette.clayGlow.withValues(alpha: 0.05),
-                          ],
-                        ),
-                        border: Border.all(color: Palette.glassBorder),
-                      ),
-                      child: const Icon(
-                        Icons.event_note_outlined,
-                        color: Palette.textSecondary,
-                        size: 32,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      l10n.myBookingsEmptyTitle,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      l10n.myBookingsEmptySubtitle,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyLarge?.copyWith(fontSize: 14),
-                    ),
-                  ],
-                ),
-              ),
-              const Spacer(flex: 2),
-            ],
-          ),
+            ),
+            const SizedBox(height: 16),
+          ],
         ),
       ),
     );

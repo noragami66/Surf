@@ -1,9 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:glina/core/style/app_theme_extensions.dart';
+import 'package:glina/core/style/glass_surface.dart';
 
-/// Frosted glass panel with backdrop blur.
+/// Solid dark panel for slot cards and empty states.
 class GlassContainer extends StatelessWidget {
   const GlassContainer({
     required this.child,
@@ -25,35 +24,11 @@ class GlassContainer extends StatelessWidget {
     final glass = GlassThemeExtension.of(context);
     final radius = borderRadius ?? BorderRadius.circular(glass.cornerRadius);
 
-    final content = ClipRRect(
-      borderRadius: radius,
-      child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: glass.blurSigma,
-          sigmaY: glass.blurSigma,
-        ),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: glass.surfaceFill,
-            borderRadius: radius,
-            border: Border.all(
-              color: glass.borderColor,
-              width: glass.borderWidth,
-            ),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.white.withValues(alpha: 0.1),
-                Colors.white.withValues(alpha: 0.02),
-              ],
-            ),
-          ),
-          child: Padding(
-            padding: padding ?? const EdgeInsets.all(20),
-            child: child,
-          ),
-        ),
+    final content = DecoratedBox(
+      decoration: GlassSurface.cardDecoration(borderRadius: radius),
+      child: Padding(
+        padding: padding ?? const EdgeInsets.all(20),
+        child: child,
       ),
     );
 

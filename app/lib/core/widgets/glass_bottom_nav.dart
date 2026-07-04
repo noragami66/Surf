@@ -1,9 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:glina/core/style/app_theme_extensions.dart';
+import 'package:glina/core/style/glass_surface.dart';
 import 'package:glina/core/style/palette.dart';
 
+/// Docked bottom tab bar — flush with the screen edge.
 class GlassBottomNav extends StatelessWidget {
   const GlassBottomNav({
     required this.selectedIndex,
@@ -21,38 +21,28 @@ class GlassBottomNav extends StatelessWidget {
     final glass = GlassThemeExtension.of(context);
     final bottomInset = MediaQuery.paddingOf(context).bottom;
 
-    return Padding(
-      padding: EdgeInsets.fromLTRB(16, 0, 16, 12 + bottomInset),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(glass.cornerRadius),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: glass.blurSigma,
-            sigmaY: glass.blurSigma,
-          ),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Palette.surfaceElevated.withValues(alpha: 0.72),
-              borderRadius: BorderRadius.circular(glass.cornerRadius),
-              border: Border.all(color: glass.borderColor),
-            ),
-            child: SizedBox(
-              height: glass.navHeight,
-              child: Row(
-                children: [
-                  for (var i = 0; i < destinations.length; i++)
-                    Expanded(
-                      child: _NavItem(
-                        destination: destinations[i],
-                        selected: selectedIndex == i,
-                        onTap: () => onDestinationSelected(i),
-                      ),
+    return DecoratedBox(
+      decoration: GlassSurface.bottomBarDecoration(),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: glass.navHeight,
+            child: Row(
+              children: [
+                for (var i = 0; i < destinations.length; i++)
+                  Expanded(
+                    child: _NavItem(
+                      destination: destinations[i],
+                      selected: selectedIndex == i,
+                      onTap: () => onDestinationSelected(i),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
           ),
-        ),
+          SizedBox(height: bottomInset),
+        ],
       ),
     );
   }
@@ -83,7 +73,8 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = selected ? Palette.ember : Palette.textMuted;
+    final glass = GlassThemeExtension.of(context);
+    final color = selected ? Palette.textPrimary : Palette.textMuted;
 
     return Material(
       color: Colors.transparent,
@@ -92,27 +83,29 @@ class _NavItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              decoration: BoxDecoration(
-                color: selected
-                    ? Palette.ember.withValues(alpha: 0.15)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Icon(
-                selected ? destination.selectedIcon : destination.icon,
-                color: color,
-                size: 22,
-              ),
+            Icon(
+              selected ? destination.selectedIcon : destination.icon,
+              color: color,
+              size: glass.navIconSize,
             ),
             const SizedBox(height: 4),
             Text(
               destination.label,
-              style: Theme.of(
-                context,
-              ).textTheme.labelLarge?.copyWith(color: color, fontSize: 11),
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: color,
+                fontSize: glass.navFontSize,
+                fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 4),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: glass.activeDotSize,
+              height: glass.activeDotSize,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: selected ? Palette.textPrimary : Colors.transparent,
+              ),
             ),
           ],
         ),

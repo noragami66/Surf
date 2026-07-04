@@ -176,6 +176,24 @@ abstract class AppLocalizations {
   /// **'Pick a workshop from the schedule to book a spot'**
   String get myBookingsEmptySubtitle;
 
+  /// No description provided for @myBookingsGoToSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to schedule'**
+  String get myBookingsGoToSchedule;
+
+  /// No description provided for @homeGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, {name}'**
+  String homeGreeting(String name);
+
+  /// No description provided for @homeGreetingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Glad to see you again'**
+  String get homeGreetingSubtitle;
+
   /// No description provided for @loading.
   ///
   /// In en, this message translates to:
