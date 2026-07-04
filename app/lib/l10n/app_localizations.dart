@@ -523,6 +523,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancelled by studio'**
   String get myBookingsStatusWorkshopCancelled;
+
+  /// No description provided for @bookingDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking details'**
+  String get bookingDetailTitle;
+
+  /// No description provided for @bookingDetailNotFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking not found'**
+  String get bookingDetailNotFoundTitle;
+
+  /// No description provided for @bookingDetailNotFoundSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'It may have been removed'**
+  String get bookingDetailNotFoundSubtitle;
+
+  /// No description provided for @bookingDetailCancelCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel booking'**
+  String get bookingDetailCancelCta;
+
+  /// No description provided for @bookingDetailCancelDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel this booking?'**
+  String get bookingDetailCancelDialogTitle;
+
+  /// No description provided for @bookingDetailCancelDialogBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Early cancellation frees your seats. Late cancellation keeps them reserved.'**
+  String get bookingDetailCancelDialogBody;
+
+  /// No description provided for @bookingDetailCancelDialogDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep booking'**
+  String get bookingDetailCancelDialogDismiss;
+
+  /// No description provided for @bookingDetailCancelDialogConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get bookingDetailCancelDialogConfirm;
+
+  /// No description provided for @bookingDetailCancelledAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled on {date}'**
+  String bookingDetailCancelledAt(String date);
+
+  /// No description provided for @bookingDetailWorkshopReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Studio reason: {reason}'**
+  String bookingDetailWorkshopReason(String reason);
+
+  /// No description provided for @bookingDetailErrorAlreadyCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'This booking is already cancelled'**
+  String get bookingDetailErrorAlreadyCancelled;
+
+  /// No description provided for @bookingDetailErrorSlotStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'The workshop has started — cancellation unavailable'**
+  String get bookingDetailErrorSlotStarted;
 }
 
 class _AppLocalizationsDelegate

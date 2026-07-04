@@ -11,6 +11,7 @@ import 'package:glina/features/auth/presentation/screens/name_screen.dart';
 import 'package:glina/features/auth/presentation/screens/otp_screen.dart';
 import 'package:glina/features/booking/presentation/screens/booking_screen.dart';
 import 'package:glina/features/my_bookings/presentation/manager/my_bookings_bloc/my_bookings_bloc.dart';
+import 'package:glina/features/my_bookings/presentation/screens/booking_detail_screen.dart';
 import 'package:glina/features/my_bookings/presentation/screens/my_bookings_screen.dart';
 import 'package:glina/features/slots/presentation/screens/slot_detail_screen.dart';
 import 'package:glina/features/slots/presentation/screens/slot_list_screen.dart';
@@ -29,6 +30,7 @@ abstract final class AppRoutes {
 
   static String slotDetail(String id) => '/slots/$id';
   static String slotBook(String id) => '/slots/$id/book';
+  static String bookingDetail(String id) => '/bookings/$id';
 }
 
 /// Builds the router with an auth redirect driven by [authBloc] state.
@@ -81,6 +83,15 @@ GoRouter createRouter(AuthBloc authBloc) {
               GoRoute(
                 path: AppRoutes.bookings,
                 builder: (context, state) => const MyBookingsScreen(),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) => BookingDetailScreen(
+                      bookingId: state.pathParameters['id']!,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

@@ -13,6 +13,7 @@ import 'package:glina/features/booking/domain/repositories/i_booking_repository.
 import 'package:glina/features/booking/presentation/manager/booking_bloc/booking_bloc.dart';
 import 'package:glina/features/my_bookings/application/i_my_bookings_service.dart';
 import 'package:glina/features/my_bookings/application/my_bookings_service_impl.dart';
+import 'package:glina/features/my_bookings/presentation/manager/booking_detail_bloc/booking_detail_bloc.dart';
 import 'package:glina/features/my_bookings/presentation/manager/my_bookings_bloc/my_bookings_bloc.dart';
 import 'package:glina/features/slots/application/i_slots_service.dart';
 import 'package:glina/features/slots/application/slots_service_impl.dart';
@@ -57,5 +58,12 @@ Future<void> setupLocator() async {
         slotsRepository: locator(),
       ),
     )
-    ..registerFactory<MyBookingsBloc>(() => MyBookingsBloc(service: locator()));
+    ..registerFactory<MyBookingsBloc>(() => MyBookingsBloc(service: locator()))
+    ..registerFactoryParam<BookingDetailBloc, String, String>(
+      (bookingId, clientId) => BookingDetailBloc(
+        service: locator(),
+        bookingId: bookingId,
+        clientId: clientId,
+      ),
+    );
 }

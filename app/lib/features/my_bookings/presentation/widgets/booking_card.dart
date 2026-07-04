@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:glina/app/router.dart';
 import 'package:glina/core/style/palette.dart';
 import 'package:glina/core/widgets/glass_container.dart';
 import 'package:glina/features/booking/domain/enums/booking_enums.dart';
 import 'package:glina/features/my_bookings/domain/entities/booking_list_item_entity.dart';
 import 'package:glina/l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class BookingCard extends StatelessWidget {
-  const BookingCard({required this.item, super.key});
+  const BookingCard({required this.item, super.key, this.onTap});
 
   final BookingListItemEntity item;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,58 +27,70 @@ class BookingCard extends StatelessWidget {
       decimalDigits: 0,
     );
 
-    return GlassContainer(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap ?? () => context.push(AppRoutes.bookingDetail(booking.id)),
+        borderRadius: BorderRadius.circular(24),
+        child: GlassContainer(
+          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.all(18),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Text(
-                  slot.program.name,
-                  style: theme.textTheme.headlineSmall?.copyWith(fontSize: 17),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      slot.program.name,
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontSize: 17,
+                      ),
+                    ),
+                  ),
+                  _StatusChip(
+                    status: booking.status,
+                    label: _statusLabel(l10n),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                slot.master.name,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  fontSize: 14,
+                  color: Palette.textMuted,
                 ),
               ),
-              _StatusChip(status: booking.status, label: _statusLabel(l10n)),
+              const SizedBox(height: 14),
+              _MetaRow(
+                icon: Icons.calendar_today_outlined,
+                label: dateFormat.format(slot.startAt),
+              ),
+              const SizedBox(height: 8),
+              _MetaRow(
+                icon: Icons.event_seat_outlined,
+                label: l10n.myBookingsSeatsCount(booking.seatsCount),
+              ),
+              if (booking.rentalCount > 0) ...[
+                const SizedBox(height: 8),
+                _MetaRow(
+                  icon: Icons.inventory_2_outlined,
+                  label: l10n.myBookingsRentalCount(booking.rentalCount),
+                ),
+              ],
+              const SizedBox(height: 14),
+              Text(
+                priceFormat.format(booking.priceTotal),
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: Palette.textPrimary,
+                  fontSize: 15,
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            slot.master.name,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              fontSize: 14,
-              color: Palette.textMuted,
-            ),
-          ),
-          const SizedBox(height: 14),
-          _MetaRow(
-            icon: Icons.calendar_today_outlined,
-            label: dateFormat.format(slot.startAt),
-          ),
-          const SizedBox(height: 8),
-          _MetaRow(
-            icon: Icons.event_seat_outlined,
-            label: l10n.myBookingsSeatsCount(booking.seatsCount),
-          ),
-          if (booking.rentalCount > 0) ...[
-            const SizedBox(height: 8),
-            _MetaRow(
-              icon: Icons.inventory_2_outlined,
-              label: l10n.myBookingsRentalCount(booking.rentalCount),
-            ),
-          ],
-          const SizedBox(height: 14),
-          Text(
-            priceFormat.format(booking.priceTotal),
-            style: theme.textTheme.labelLarge?.copyWith(
-              color: Palette.textPrimary,
-              fontSize: 15,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

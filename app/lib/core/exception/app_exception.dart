@@ -88,3 +88,21 @@ final class InvalidIdempotencyKeyException extends AppException {
   const InvalidIdempotencyKeyException()
     : super('invalid_idempotency_key', 'Missing idempotency key');
 }
+
+/// Booking id was not found or belongs to another client.
+final class BookingNotFoundException extends AppException {
+  const BookingNotFoundException()
+    : super('booking_not_found', 'Booking was not found');
+}
+
+/// Booking is already cancelled (UC-2 E2).
+final class BookingAlreadyCancelledException extends AppException {
+  const BookingAlreadyCancelledException()
+    : super('booking_already_cancelled', 'Booking is already cancelled');
+}
+
+/// Cannot cancel — the workshop has started (UC-2 E1).
+final class BookingCancelSlotStartedException extends AppException {
+  const BookingCancelSlotStartedException()
+    : super('booking_cancel_slot_started', 'The workshop has already started');
+}

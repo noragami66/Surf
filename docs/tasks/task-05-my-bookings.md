@@ -27,6 +27,13 @@ BookingDetailScreen → BookingDetailBloc → IMyBookingsService
 | :-- | :-- |
 | ✅ | listBookings, MyBookingsBloc, BookingCard, refresh on book/tab |
 | ✅ | Nav fix: AppRoutes.slotBook on slot detail |
-| 🔲 | getBooking, cancelBooking, BookingDetailScreen, /bookings/:id |
-| 🔲 | cancellation_window_minutes mock (120 min) |
-| 🔲 | Tests |
+| ✅ | getBooking, cancelBooking, BookingDetailScreen, /bookings/:id |
+| ✅ | AppConfigMock.cancellationWindowMinutes = 120 |
+| ✅ | Tests: list, early cancel restores seats |
+
+## Commit log
+
+```
+PLATF-015: feat(my_bookings): list bookings, refresh after create, fix book nav
+PLATF-015: feat(my_bookings): booking detail screen and cancel flow
+```

@@ -25,6 +25,7 @@ reference the same id.
 ### Added
 
 - My Bookings list: `MyBookingsBloc`, `MyBookingsServiceImpl`, `listBookings` in mock repo, `BookingCard`, refresh after booking and on tab switch ([PLATF-015](docs/tasks/task-05-my-bookings.md))
+- My Bookings detail + cancel: `BookingDetailScreen`, `BookingDetailBloc`, `getBooking`/`cancelBooking`, route `/bookings/:id`, early/late cancel via `cancellation_window_minutes` mock ([PLATF-015](docs/tasks/task-05-my-bookings.md))
 - Slots detail + booking slice: `SlotDetailScreen`, `BookingScreen`, `SlotDetailBloc`, `BookingBloc`, `BookingServiceImpl`, `BookingRepositoryMock`, shared `MockSlotStore`, routes `/slots/:id` and `/slots/:id/book`, unit + bloc tests ([PLATF-014](docs/tasks/task-04-slots-booking.md))
 - UI polish: mesh-gradient ambient background, black card surfaces with `cardBorder`, `HomeUserHeader` greeting, shared `GlassPrimaryButton` / `GlassEmptyState` / `GlassIconBadge`, docked full-width bottom nav with labels, l10n home greeting strings ([PLATF-013](app/))
 - (dev) Initial MVP analytics for «Глина»: customer brief, elicitation, user stories, FR/BR/NFR, use cases, prompts, task doc, git init ([PLATF-001](docs/tasks/task-00-mvp-analysis.md))

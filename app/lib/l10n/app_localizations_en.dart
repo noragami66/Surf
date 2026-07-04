@@ -269,4 +269,47 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get myBookingsStatusWorkshopCancelled => 'Cancelled by studio';
+
+  @override
+  String get bookingDetailTitle => 'Booking details';
+
+  @override
+  String get bookingDetailNotFoundTitle => 'Booking not found';
+
+  @override
+  String get bookingDetailNotFoundSubtitle => 'It may have been removed';
+
+  @override
+  String get bookingDetailCancelCta => 'Cancel booking';
+
+  @override
+  String get bookingDetailCancelDialogTitle => 'Cancel this booking?';
+
+  @override
+  String get bookingDetailCancelDialogBody =>
+      'Early cancellation frees your seats. Late cancellation keeps them reserved.';
+
+  @override
+  String get bookingDetailCancelDialogDismiss => 'Keep booking';
+
+  @override
+  String get bookingDetailCancelDialogConfirm => 'Cancel';
+
+  @override
+  String bookingDetailCancelledAt(String date) {
+    return 'Cancelled on $date';
+  }
+
+  @override
+  String bookingDetailWorkshopReason(String reason) {
+    return 'Studio reason: $reason';
+  }
+
+  @override
+  String get bookingDetailErrorAlreadyCancelled =>
+      'This booking is already cancelled';
+
+  @override
+  String get bookingDetailErrorSlotStarted =>
+      'The workshop has started — cancellation unavailable';
 }

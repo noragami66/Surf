@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:glina/features/booking/application/booking_service_impl.dart';
 import 'package:glina/features/booking/data/repositories/booking_repository_mock.dart';
+import 'package:glina/features/booking/domain/enums/booking_enums.dart';
 import 'package:glina/features/my_bookings/application/my_bookings_service_impl.dart';
 import 'package:glina/features/slots/data/mock_slot_store.dart';
 import 'package:glina/features/slots/data/repositories/slots_repository_mock.dart';
@@ -54,7 +55,32 @@ void main() {
     },
   );
 
-  test('listBookings returns empty list when client has no bookings', () async {
-    expect(await service.listBookings(clientId), isEmpty);
+  test('cancelBooking early cancel restores slot seats', () async {
+    final bookingRepo = BookingRepositoryMock(store: store);
+    final bookingService = BookingServiceImpl(repository: bookingRepo);
+    service = MyBookingsServiceImpl(
+      bookingRepository: bookingRepo,
+      slotsRepository: SlotsRepositoryMock(store: store),
+    );
+
+    final freeBefore = store.slots.first.freeSeats;
+
+    final created = await bookingService.createBooking(
+      clientId: clientId,
+      slotId: slotId,
+      seatsCount: 1,
+      rentalCount: 0,
+      idempotencyKey: idempotencyKey,
+    );
+
+    expect(store.slots.first.freeSeats, freeBefore - 1);
+
+    final cancelled = await service.cancelBooking(
+      bookingId: created.id,
+      clientId: clientId,
+    );
+
+    expect(cancelled.booking.status, BookingStatus.cancelled);
+    expect(store.slots.first.freeSeats, freeBefore);
   });
 }

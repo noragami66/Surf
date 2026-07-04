@@ -84,5 +84,17 @@
   "myBookingsStatusActive": "Активна",
   "myBookingsStatusCancelled": "Отменена",
   "myBookingsStatusLateCancel": "Поздняя отмена",
-  "myBookingsStatusWorkshopCancelled": "Отменено мастерской"
+  "myBookingsStatusWorkshopCancelled": "Отменено мастерской",
+  "bookingDetailTitle": "Детали записи",
+  "bookingDetailNotFoundTitle": "Запись не найдена",
+  "bookingDetailNotFoundSubtitle": "Возможно, она была удалена",
+  "bookingDetailCancelCta": "Отменить запись",
+  "bookingDetailCancelDialogTitle": "Отменить эту запись?",
+  "bookingDetailCancelDialogBody": "Ранняя отмена освобождает места. Поздняя — места остаются занятыми.",
+  "bookingDetailCancelDialogDismiss": "Оставить запись",
+  "bookingDetailCancelDialogConfirm": "Отменить",
+  "bookingDetailCancelledAt": "Отменено {date}",
+  "bookingDetailWorkshopReason": "Причина мастерской: {reason}",
+  "bookingDetailErrorAlreadyCancelled": "Эта запись уже отменена",
+  "bookingDetailErrorSlotStarted": "Занятие уже началось — отмена недоступна"
 }

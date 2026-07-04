@@ -124,5 +124,27 @@
   "myBookingsStatusActive": "Active",
   "myBookingsStatusCancelled": "Cancelled",
   "myBookingsStatusLateCancel": "Late cancel",
-  "myBookingsStatusWorkshopCancelled": "Cancelled by studio"
+  "myBookingsStatusWorkshopCancelled": "Cancelled by studio",
+  "bookingDetailTitle": "Booking details",
+  "bookingDetailNotFoundTitle": "Booking not found",
+  "bookingDetailNotFoundSubtitle": "It may have been removed",
+  "bookingDetailCancelCta": "Cancel booking",
+  "bookingDetailCancelDialogTitle": "Cancel this booking?",
+  "bookingDetailCancelDialogBody": "Early cancellation frees your seats. Late cancellation keeps them reserved.",
+  "bookingDetailCancelDialogDismiss": "Keep booking",
+  "bookingDetailCancelDialogConfirm": "Cancel",
+  "bookingDetailCancelledAt": "Cancelled on {date}",
+  "@bookingDetailCancelledAt": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "bookingDetailWorkshopReason": "Studio reason: {reason}",
+  "@bookingDetailWorkshopReason": {
+    "placeholders": {
+      "reason": { "type": "String" }
+    }
+  },
+  "bookingDetailErrorAlreadyCancelled": "This booking is already cancelled",
+  "bookingDetailErrorSlotStarted": "The workshop has started — cancellation unavailable"
 }

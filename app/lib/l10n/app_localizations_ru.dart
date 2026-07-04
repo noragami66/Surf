@@ -273,4 +273,46 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get myBookingsStatusWorkshopCancelled => 'Отменено мастерской';
+
+  @override
+  String get bookingDetailTitle => 'Детали записи';
+
+  @override
+  String get bookingDetailNotFoundTitle => 'Запись не найдена';
+
+  @override
+  String get bookingDetailNotFoundSubtitle => 'Возможно, она была удалена';
+
+  @override
+  String get bookingDetailCancelCta => 'Отменить запись';
+
+  @override
+  String get bookingDetailCancelDialogTitle => 'Отменить эту запись?';
+
+  @override
+  String get bookingDetailCancelDialogBody =>
+      'Ранняя отмена освобождает места. Поздняя — места остаются занятыми.';
+
+  @override
+  String get bookingDetailCancelDialogDismiss => 'Оставить запись';
+
+  @override
+  String get bookingDetailCancelDialogConfirm => 'Отменить';
+
+  @override
+  String bookingDetailCancelledAt(String date) {
+    return 'Отменено $date';
+  }
+
+  @override
+  String bookingDetailWorkshopReason(String reason) {
+    return 'Причина мастерской: $reason';
+  }
+
+  @override
+  String get bookingDetailErrorAlreadyCancelled => 'Эта запись уже отменена';
+
+  @override
+  String get bookingDetailErrorSlotStarted =>
+      'Занятие уже началось — отмена недоступна';
 }

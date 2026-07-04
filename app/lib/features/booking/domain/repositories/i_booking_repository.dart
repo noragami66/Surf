@@ -10,4 +10,14 @@ abstract interface class IBookingRepository {
   });
 
   Future<List<BookingEntity>> listBookings({required String clientId});
+
+  Future<BookingEntity> getBooking({
+    required String bookingId,
+    required String clientId,
+  });
+
+  Future<BookingEntity> cancelBooking({
+    required String bookingId,
+    required String clientId,
+  });
 }
