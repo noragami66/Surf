@@ -1,0 +1,29 @@
+name: glina
+description: Client app for Glina pottery workshop (Surf summer school 2026).
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.11.0 <4.0.0"
+
+dependencies:
+  cupertino_icons: ^1.0.8
+  equatable: ^2.0.7
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.0
+  flutter_localizations:
+    sdk: flutter
+  flutter_secure_storage: ^9.2.4
+  get_it: ^8.0.3
+  go_router: ^15.1.2
+  intl: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^7.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true

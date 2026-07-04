@@ -26,6 +26,7 @@ reference the same id.
 
 - (dev) Initial MVP analytics for «Глина»: customer brief, elicitation, user stories, FR/BR/NFR, use cases, prompts, task doc, git init ([PLATF-001](docs/tasks/task-00-mvp-analysis.md))
 - (dev) Architecture phase: data model, API contract, Flutter Clean Architecture plan ([PLATF-004](docs/tasks/task-01-architecture.md))
+- Flutter bootstrap: `app/` project, Clean Architecture skeleton, slots empty-state slice ([PLATF-009](docs/tasks/task-02-flutter-bootstrap.md))
 
 ### Changed
 
@@ -52,4 +53,5 @@ reference the same id.
 | PLATF-005 | `f244e75` | Application layer, Deriverse structure alignment between BLoC and Repository, NFR-ARCH-5 |
 | PLATF-006 | `6fc5f74` | Review fixes: R registry, cancellation_window API, UC-6, 3-design rename |
 | PLATF-007 | `6dc2e63` | Booking state mermaid: cancellation window labels |
-| PLATF-008 | — | Fix prompts link in README |
+| PLATF-008 | `b4975ea` | Fix prompts link in README |
+| PLATF-009 | — | Flutter bootstrap: glina app, DI, l10n, slots slice |

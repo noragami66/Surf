@@ -8,8 +8,8 @@
 | :-- | :-- |
 | 1. MVP / Анализ | ✅ Готово |
 | 2. Архитектура | ✅ Готово |
-| 3. Flutter-приложение | ⏳ Следующий |
-| 4–6. Фичи (3) | ⏳ |
+| 3. Flutter-приложение | ✅ Bootstrap (PLATF-009) |
+| 4–6. Фичи (3) | ⏳ Следующий |
 | 7. Тесты + баги (3) | ⏳ |
 
 > **Этап 7:** ручные test cases + **3 намеренных бага** — каждый с `.md`, prompt, шагами воспроизведения, fix и PLATF-XXX commit.
@@ -48,6 +48,8 @@ CHANGELOG.md        — журнал изменений (формат Keep a Cha
 - [Use cases](docs/01-analysis/2-requirements/use-cases.md)
 - [Task 00: MVP](docs/tasks/task-00-mvp-analysis.md)
 - [Task 01: Architecture](docs/tasks/task-01-architecture.md)
+- [Task 02: Flutter bootstrap](docs/tasks/task-02-flutter-bootstrap.md)
+- [App README (run)](app/README.md)
 
 ## Стек (план)
 

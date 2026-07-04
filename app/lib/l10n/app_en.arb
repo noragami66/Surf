@@ -1,0 +1,14 @@
+{
+  "@@locale": "en",
+  "appTitle": "Glina",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "slotsTab": "Slots",
+  "myBookingsTab": "My bookings",
+  "slotsEmptyTitle": "No workshops available yet",
+  "@slotsEmptyTitle": {
+    "description": "Empty state when no slots in schedule"
+  },
+  "loading": "Loading…"
+}

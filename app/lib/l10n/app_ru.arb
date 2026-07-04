@@ -1,0 +1,8 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Глина",
+  "slotsTab": "Слоты",
+  "myBookingsTab": "Мои записи",
+  "slotsEmptyTitle": "Пока нет доступных занятий",
+  "loading": "Загрузка…"
+}
