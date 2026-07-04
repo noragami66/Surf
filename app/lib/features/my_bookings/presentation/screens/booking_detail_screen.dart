@@ -12,6 +12,7 @@ import 'package:glina/features/my_bookings/domain/entities/booking_list_item_ent
 import 'package:glina/features/my_bookings/presentation/manager/booking_detail_bloc/booking_detail_bloc.dart';
 import 'package:glina/features/my_bookings/presentation/manager/my_bookings_bloc/my_bookings_bloc.dart';
 import 'package:glina/features/my_bookings/presentation/widgets/booking_card.dart';
+import 'package:glina/features/slots/presentation/manager/slots_bloc/slots_bloc.dart';
 import 'package:glina/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -53,6 +54,7 @@ class _BookingDetailView extends StatelessWidget {
         final clientId = context.read<AuthBloc>().state.client?.id;
         if (clientId != null) {
           context.read<MyBookingsBloc>().add(RefreshMyBookingsEvent(clientId));
+          context.read<SlotsBloc>().add(const RefreshSlotsEvent());
         }
         context.pop();
       },
