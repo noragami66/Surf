@@ -78,5 +78,11 @@
   "bookingErrorSlotCancelled": "Занятие отменено мастерской",
   "bookingErrorSlotStarted": "Занятие уже началось",
   "bookingErrorInvalidSeats": "Выберите от 1 до 3 мест",
-  "bookingErrorInvalidRental": "Прокат не может превышать число мест"
+  "bookingErrorInvalidRental": "Прокат не может превышать число мест",
+  "myBookingsSeatsCount": "{count, plural, one{{count} место} few{{count} места} many{{count} мест} other{{count} мест}}",
+  "myBookingsRentalCount": "{count, plural, one{{count} прокат} few{{count} проката} many{{count} прокатов} other{{count} прокатов}}",
+  "myBookingsStatusActive": "Активна",
+  "myBookingsStatusCancelled": "Отменена",
+  "myBookingsStatusLateCancel": "Поздняя отмена",
+  "myBookingsStatusWorkshopCancelled": "Отменено мастерской"
 }

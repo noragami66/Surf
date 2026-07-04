@@ -487,6 +487,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rental count cannot exceed the number of seats'**
   String get bookingErrorInvalidRental;
+
+  /// No description provided for @myBookingsSeatsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} seat} other{{count} seats}}'**
+  String myBookingsSeatsCount(int count);
+
+  /// No description provided for @myBookingsRentalCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} rental kit} other{{count} rental kits}}'**
+  String myBookingsRentalCount(int count);
+
+  /// No description provided for @myBookingsStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get myBookingsStatusActive;
+
+  /// No description provided for @myBookingsStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get myBookingsStatusCancelled;
+
+  /// No description provided for @myBookingsStatusLateCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Late cancel'**
+  String get myBookingsStatusLateCancel;
+
+  /// No description provided for @myBookingsStatusWorkshopCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled by studio'**
+  String get myBookingsStatusWorkshopCancelled;
 }
 
 class _AppLocalizationsDelegate

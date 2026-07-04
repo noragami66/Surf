@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glina/core/widgets/ambient_background.dart';
 import 'package:glina/core/widgets/glass_bottom_nav.dart';
 import 'package:glina/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:glina/features/auth/presentation/screens/login_screen.dart';
 import 'package:glina/features/auth/presentation/screens/name_screen.dart';
 import 'package:glina/features/auth/presentation/screens/otp_screen.dart';
 import 'package:glina/features/booking/presentation/screens/booking_screen.dart';
+import 'package:glina/features/my_bookings/presentation/manager/my_bookings_bloc/my_bookings_bloc.dart';
 import 'package:glina/features/my_bookings/presentation/screens/my_bookings_screen.dart';
 import 'package:glina/features/slots/presentation/screens/slot_detail_screen.dart';
 import 'package:glina/features/slots/presentation/screens/slot_list_screen.dart';
@@ -146,7 +148,17 @@ class _HomeShell extends StatelessWidget {
       ),
       bottomNavigationBar: GlassBottomNav(
         selectedIndex: navigationShell.currentIndex,
-        onDestinationSelected: navigationShell.goBranch,
+        onDestinationSelected: (index) {
+          navigationShell.goBranch(index);
+          if (index == 1) {
+            final clientId = context.read<AuthBloc>().state.client?.id;
+            if (clientId != null) {
+              context.read<MyBookingsBloc>().add(
+                RefreshMyBookingsEvent(clientId),
+              );
+            }
+          }
+        },
         destinations: [
           GlassNavDestination(
             icon: Icons.calendar_month_outlined,

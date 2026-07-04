@@ -235,4 +235,38 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get bookingErrorInvalidRental =>
       'Rental count cannot exceed the number of seats';
+
+  @override
+  String myBookingsSeatsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count seats',
+      one: '$count seat',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String myBookingsRentalCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count rental kits',
+      one: '$count rental kit',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get myBookingsStatusActive => 'Active';
+
+  @override
+  String get myBookingsStatusCancelled => 'Cancelled';
+
+  @override
+  String get myBookingsStatusLateCancel => 'Late cancel';
+
+  @override
+  String get myBookingsStatusWorkshopCancelled => 'Cancelled by studio';
 }

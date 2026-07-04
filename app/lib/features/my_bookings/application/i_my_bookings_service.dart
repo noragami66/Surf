@@ -1,3 +1,7 @@
+import 'package:glina/features/my_bookings/domain/entities/booking_list_item_entity.dart';
+
+// Cancel use case arrives in stage 6; list only for now.
+// ignore: one_member_abstracts
 abstract interface class IMyBookingsService {
-  // Phase 4+: list/cancel bookings
+  Future<List<BookingListItemEntity>> listBookings(String clientId);
 }

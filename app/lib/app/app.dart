@@ -5,6 +5,7 @@ import 'package:glina/app/router.dart';
 import 'package:glina/core/style/app_theme.dart';
 import 'package:glina/dependency_injection/locator/locator.dart';
 import 'package:glina/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
+import 'package:glina/features/my_bookings/presentation/manager/my_bookings_bloc/my_bookings_bloc.dart';
 import 'package:glina/features/slots/presentation/manager/slots_bloc/slots_bloc.dart';
 import 'package:glina/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -41,6 +42,7 @@ class _GlinaAppState extends State<GlinaApp> {
         BlocProvider<SlotsBloc>(
           create: (_) => locator<SlotsBloc>()..add(const LoadSlotsEvent()),
         ),
+        BlocProvider<MyBookingsBloc>(create: (_) => locator<MyBookingsBloc>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

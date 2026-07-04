@@ -108,5 +108,21 @@
   "bookingErrorSlotCancelled": "This workshop was cancelled by the studio",
   "bookingErrorSlotStarted": "This workshop has already started",
   "bookingErrorInvalidSeats": "Choose between 1 and 3 seats",
-  "bookingErrorInvalidRental": "Rental count cannot exceed the number of seats"
+  "bookingErrorInvalidRental": "Rental count cannot exceed the number of seats",
+  "myBookingsSeatsCount": "{count, plural, one{{count} seat} other{{count} seats}}",
+  "@myBookingsSeatsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "myBookingsRentalCount": "{count, plural, one{{count} rental kit} other{{count} rental kits}}",
+  "@myBookingsRentalCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "myBookingsStatusActive": "Active",
+  "myBookingsStatusCancelled": "Cancelled",
+  "myBookingsStatusLateCancel": "Late cancel",
+  "myBookingsStatusWorkshopCancelled": "Cancelled by studio"
 }

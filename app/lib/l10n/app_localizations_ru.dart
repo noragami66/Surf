@@ -235,4 +235,42 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get bookingErrorInvalidRental =>
       'Прокат не может превышать число мест';
+
+  @override
+  String myBookingsSeatsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count мест',
+      many: '$count мест',
+      few: '$count места',
+      one: '$count место',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String myBookingsRentalCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count прокатов',
+      many: '$count прокатов',
+      few: '$count проката',
+      one: '$count прокат',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get myBookingsStatusActive => 'Активна';
+
+  @override
+  String get myBookingsStatusCancelled => 'Отменена';
+
+  @override
+  String get myBookingsStatusLateCancel => 'Поздняя отмена';
+
+  @override
+  String get myBookingsStatusWorkshopCancelled => 'Отменено мастерской';
 }

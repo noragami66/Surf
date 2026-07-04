@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glina/app/router.dart';
 import 'package:glina/core/style/app_theme_extensions.dart';
 import 'package:glina/core/style/palette.dart';
 import 'package:glina/core/widgets/ambient_background.dart';
@@ -192,7 +193,9 @@ class _LoadedContent extends StatelessWidget {
           const SizedBox(height: 24),
           GlassPrimaryButton(
             label: l10n.slotDetailBookCta,
-            onPressed: canBook ? () => context.push('book') : null,
+            onPressed: canBook
+                ? () => context.push(AppRoutes.slotBook(slot.id))
+                : null,
             showTrailingArrow: true,
           ),
           if (!canBook) ...[

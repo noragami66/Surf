@@ -84,6 +84,14 @@ class BookingRepositoryMock implements IBookingRepository {
     return booking;
   }
 
+  @override
+  Future<List<BookingEntity>> listBookings({required String clientId}) async {
+    await Future<void>.delayed(_latency);
+    return _store.bookings
+        .where((booking) => booking.clientId == clientId)
+        .toList(growable: false);
+  }
+
   SlotEntity _decrementSlot(SlotEntity slot, int seatsCount, int rentalCount) {
     return SlotEntity(
       id: slot.id,

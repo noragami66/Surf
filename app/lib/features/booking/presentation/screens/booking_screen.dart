@@ -9,6 +9,7 @@ import 'package:glina/core/widgets/glass_primary_button.dart';
 import 'package:glina/dependency_injection/locator/locator.dart';
 import 'package:glina/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
 import 'package:glina/features/booking/presentation/manager/booking_bloc/booking_bloc.dart';
+import 'package:glina/features/my_bookings/presentation/manager/my_bookings_bloc/my_bookings_bloc.dart';
 import 'package:glina/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -47,6 +48,10 @@ class _BookingView extends StatelessWidget {
           previous.status != current.status &&
           current.status == BookingFormStatus.success,
       listener: (context, state) {
+        final clientId = context.read<AuthBloc>().state.client?.id;
+        if (clientId != null) {
+          context.read<MyBookingsBloc>().add(RefreshMyBookingsEvent(clientId));
+        }
         context.go('/bookings');
       },
       builder: (context, state) {

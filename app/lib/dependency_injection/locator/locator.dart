@@ -11,6 +11,9 @@ import 'package:glina/features/booking/application/i_booking_service.dart';
 import 'package:glina/features/booking/data/repositories/booking_repository_mock.dart';
 import 'package:glina/features/booking/domain/repositories/i_booking_repository.dart';
 import 'package:glina/features/booking/presentation/manager/booking_bloc/booking_bloc.dart';
+import 'package:glina/features/my_bookings/application/i_my_bookings_service.dart';
+import 'package:glina/features/my_bookings/application/my_bookings_service_impl.dart';
+import 'package:glina/features/my_bookings/presentation/manager/my_bookings_bloc/my_bookings_bloc.dart';
 import 'package:glina/features/slots/application/i_slots_service.dart';
 import 'package:glina/features/slots/application/slots_service_impl.dart';
 import 'package:glina/features/slots/data/repositories/slots_repository_mock.dart';
@@ -47,5 +50,12 @@ Future<void> setupLocator() async {
         slotId: slotId,
         clientId: clientId,
       ),
-    );
+    )
+    ..registerLazySingleton<IMyBookingsService>(
+      () => MyBookingsServiceImpl(
+        bookingRepository: locator(),
+        slotsRepository: locator(),
+      ),
+    )
+    ..registerFactory<MyBookingsBloc>(() => MyBookingsBloc(service: locator()));
 }

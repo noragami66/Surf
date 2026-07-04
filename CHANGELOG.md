@@ -24,6 +24,7 @@ reference the same id.
 
 ### Added
 
+- My Bookings list: `MyBookingsBloc`, `MyBookingsServiceImpl`, `listBookings` in mock repo, `BookingCard`, refresh after booking and on tab switch ([PLATF-015](docs/tasks/task-05-my-bookings.md))
 - Slots detail + booking slice: `SlotDetailScreen`, `BookingScreen`, `SlotDetailBloc`, `BookingBloc`, `BookingServiceImpl`, `BookingRepositoryMock`, shared `MockSlotStore`, routes `/slots/:id` and `/slots/:id/book`, unit + bloc tests ([PLATF-014](docs/tasks/task-04-slots-booking.md))
 - UI polish: mesh-gradient ambient background, black card surfaces with `cardBorder`, `HomeUserHeader` greeting, shared `GlassPrimaryButton` / `GlassEmptyState` / `GlassIconBadge`, docked full-width bottom nav with labels, l10n home greeting strings ([PLATF-013](app/))
 - (dev) Initial MVP analytics for «Глина»: customer brief, elicitation, user stories, FR/BR/NFR, use cases, prompts, task doc, git init ([PLATF-001](docs/tasks/task-00-mvp-analysis.md))
@@ -43,6 +44,8 @@ reference the same id.
 - (dev) Fix prompts link in README to point at prompts/README.md ([PLATF-008](README.md))
 
 ### Fixed
+
+- Slot detail «Записаться» navigation: absolute route `/slots/:id/book` instead of relative push ([PLATF-015](app/))
 
 ### Removed
 
@@ -64,3 +67,4 @@ reference the same id.
 | PLATF-012 | — | Auth OTP flow: bloc, screens, router guard, secure session, tests |
 | PLATF-013 | `00cfc1c` | UI polish: mesh gradient, card surfaces, home header, docked nav |
 | PLATF-014 | `28e10c7` | Slot detail screen, booking flow, mock repo, tests |
+| PLATF-015 | — | My bookings list, booking refresh, slot detail nav fix |
