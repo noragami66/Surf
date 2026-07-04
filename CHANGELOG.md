@@ -24,6 +24,7 @@ reference the same id.
 
 ### Added
 
+- Quality (stage 7): expanded BLoC/repo tests (43 total), logout in header, pull-to-refresh on schedule, bug docs + manual checklist ([PLATF-016](docs/tasks/task-06-quality.md))
 - My Bookings list: `MyBookingsBloc`, `MyBookingsServiceImpl`, `listBookings` in mock repo, `BookingCard`, refresh after booking and on tab switch ([PLATF-015](docs/tasks/task-05-my-bookings.md))
 - My Bookings detail + cancel: `BookingDetailScreen`, `BookingDetailBloc`, `getBooking`/`cancelBooking`, route `/bookings/:id`, early/late cancel via `cancellation_window_minutes` mock ([PLATF-015](docs/tasks/task-05-my-bookings.md))
 - Slots detail + booking slice: `SlotDetailScreen`, `BookingScreen`, `SlotDetailBloc`, `BookingBloc`, `BookingServiceImpl`, `BookingRepositoryMock`, shared `MockSlotStore`, routes `/slots/:id` and `/slots/:id/book`, unit + bloc tests ([PLATF-014](docs/tasks/task-04-slots-booking.md))
@@ -68,4 +69,5 @@ reference the same id.
 | PLATF-012 | — | Auth OTP flow: bloc, screens, router guard, secure session, tests |
 | PLATF-013 | `00cfc1c` | UI polish: mesh gradient, card surfaces, home header, docked nav |
 | PLATF-014 | `28e10c7` | Slot detail screen, booking flow, mock repo, tests |
-| PLATF-015 | — | My bookings list, booking refresh, slot detail nav fix |
+| PLATF-015 | `1417f5d` | My bookings list, detail, cancel flow |
+| PLATF-016 | — | Tests expansion, logout, pull-to-refresh, quality docs |

@@ -6,15 +6,15 @@
 
 | Этап | Статус |
 | :-- | :-- |
-| 1. MVP / Анализ | ✅ Готово |
-| 2. Архитектура | ✅ Готово |
-| 3. Flutter-приложение | ✅ Bootstrap (PLATF-009) + UI (PLATF-010) |
-| 4. Auth (OTP) | ⏳ **Следующий** |
-| 5. Slots detail + Booking | ⏳ |
-| 6. My bookings + cancel | ⏳ |
-| 7. Тесты + баги (3) | ⏳ |
+| 1. MVP / Анализ | ✅ |
+| 2. Архитектура | ✅ |
+| 3. Flutter bootstrap + UI | ✅ PLATF-009…010 |
+| 4. Auth (OTP) | ✅ PLATF-012 |
+| 5. Slots detail + Booking | ✅ PLATF-014 |
+| 6. My bookings + cancel | ✅ PLATF-015 |
+| 7. Тесты + баги (3) | ✅ PLATF-016…019 |
 
-> **Этап 7:** ручные test cases + **3 намеренных бага** — каждый с `.md`, prompt, шагами воспроизведения, fix и PLATF-XXX commit.
+> **Этап 7:** unit/bloc-тесты, polish, **3 бага** — см. [docs/bugs/README.md](docs/bugs/README.md).
 
 ## Соответствие нумерации этапов
 
@@ -29,6 +29,7 @@
 ```
 docs/01-analysis/   — артефакты аналитики (День 1)
 docs/tasks/         — документы по задачам задания
+docs/bugs/          — намеренные баги этапа 7
 prompts/            — промпты для AI
 app/                — Flutter-проект (этап 3+)
 CHANGELOG.md        — журнал изменений (формат Keep a Changelog)
@@ -51,6 +52,7 @@ CHANGELOG.md        — журнал изменений (формат Keep a Cha
 - [Task 00: MVP](docs/tasks/task-00-mvp-analysis.md)
 - [Task 01: Architecture](docs/tasks/task-01-architecture.md)
 - [Task 02: Flutter bootstrap](docs/tasks/task-02-flutter-bootstrap.md)
+- [Task 06: Quality](docs/tasks/task-06-quality.md)
 - [App README (run)](app/README.md)
 
 ## Стек (план)

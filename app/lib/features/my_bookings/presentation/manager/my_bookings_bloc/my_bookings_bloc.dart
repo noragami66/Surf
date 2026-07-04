@@ -15,6 +15,8 @@ class MyBookingsBloc extends Bloc<MyBookingsEvent, MyBookingsState> {
         case LoadMyBookingsEvent(:final clientId):
         case RefreshMyBookingsEvent(:final clientId):
           await _onLoad(clientId, emit);
+        case ResetMyBookingsEvent():
+          emit(const MyBookingsState.initial());
       }
     });
   }

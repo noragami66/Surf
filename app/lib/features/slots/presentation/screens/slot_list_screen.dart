@@ -11,6 +11,13 @@ import 'package:glina/l10n/app_localizations.dart';
 class SlotListScreen extends StatelessWidget {
   const SlotListScreen({super.key});
 
+  Future<void> _onRefresh(BuildContext context) async {
+    final bloc = context.read<SlotsBloc>()..add(const RefreshSlotsEvent());
+    await bloc.stream.firstWhere(
+      (state) => state.status != SlotsStatus.loading,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -22,69 +29,76 @@ class SlotListScreen extends StatelessWidget {
         bottom: false,
         child: BlocBuilder<SlotsBloc, SlotsState>(
           builder: (context, state) {
-            return CustomScrollView(
-              physics: const BouncingScrollPhysics(),
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      glass.screenPaddingH,
-                      glass.screenPaddingTop,
-                      glass.screenPaddingH,
-                      0,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const HomeUserHeader(),
-                        SizedBox(height: glass.sectionGap),
-                        ScreenPageHeader(
-                          title: l10n.slotsSectionTitle,
-                          subtitle: l10n.appTagline,
-                        ),
-                      ],
-                    ),
-                  ),
+            return RefreshIndicator(
+              color: Palette.textPrimary,
+              backgroundColor: Palette.surfaceElevated,
+              onRefresh: () => _onRefresh(context),
+              child: CustomScrollView(
+                physics: const AlwaysScrollableScrollPhysics(
+                  parent: BouncingScrollPhysics(),
                 ),
-                switch (state.status) {
-                  SlotsStatus.initial ||
-                  SlotsStatus.loading => SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: _LoadingState(message: l10n.loading),
-                  ),
-                  SlotsStatus.empty => SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: GlassEmptyState(
-                      icon: Icons.calendar_month_outlined,
-                      title: l10n.slotsEmptyTitle,
-                      subtitle: l10n.slotsEmptySubtitle,
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        glass.screenPaddingH,
+                        glass.screenPaddingTop,
+                        glass.screenPaddingH,
+                        0,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const HomeUserHeader(),
+                          SizedBox(height: glass.sectionGap),
+                          ScreenPageHeader(
+                            title: l10n.slotsSectionTitle,
+                            subtitle: l10n.appTagline,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  SlotsStatus.loaded => SliverPadding(
-                    padding: EdgeInsets.fromLTRB(
-                      glass.screenPaddingH,
-                      16,
-                      glass.screenPaddingH,
-                      16,
+                  switch (state.status) {
+                    SlotsStatus.initial ||
+                    SlotsStatus.loading => SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: _LoadingState(message: l10n.loading),
                     ),
-                    sliver: SliverList.separated(
-                      itemCount: state.slots.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 0),
-                      itemBuilder: (context, index) {
-                        return SlotCard(slot: state.slots[index]);
-                      },
+                    SlotsStatus.empty => SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: GlassEmptyState(
+                        icon: Icons.calendar_month_outlined,
+                        title: l10n.slotsEmptyTitle,
+                        subtitle: l10n.slotsEmptySubtitle,
+                      ),
                     ),
-                  ),
-                  SlotsStatus.failure => SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: GlassEmptyState(
-                      icon: Icons.cloud_off_outlined,
-                      title: l10n.slotsErrorTitle,
-                      subtitle: state.errorMessage ?? l10n.slotsErrorSubtitle,
+                    SlotsStatus.loaded => SliverPadding(
+                      padding: EdgeInsets.fromLTRB(
+                        glass.screenPaddingH,
+                        16,
+                        glass.screenPaddingH,
+                        16,
+                      ),
+                      sliver: SliverList.separated(
+                        itemCount: state.slots.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 0),
+                        itemBuilder: (context, index) {
+                          return SlotCard(slot: state.slots[index]);
+                        },
+                      ),
                     ),
-                  ),
-                },
-              ],
+                    SlotsStatus.failure => SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: GlassEmptyState(
+                        icon: Icons.cloud_off_outlined,
+                        title: l10n.slotsErrorTitle,
+                        subtitle: state.errorMessage ?? l10n.slotsErrorSubtitle,
+                      ),
+                    ),
+                  },
+                ],
+              ),
             );
           },
         ),

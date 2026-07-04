@@ -61,6 +61,16 @@ class HomeUserHeader extends StatelessWidget {
                 ],
               ),
             ),
+            IconButton(
+              tooltip: l10n.logout,
+              onPressed: () =>
+                  context.read<AuthBloc>().add(const AuthLoggedOut()),
+              icon: const Icon(
+                Icons.logout_rounded,
+                size: 20,
+                color: Palette.textMuted,
+              ),
+            ),
           ],
         );
       },

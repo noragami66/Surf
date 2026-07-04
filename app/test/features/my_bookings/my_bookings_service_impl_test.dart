@@ -55,6 +55,10 @@ void main() {
     },
   );
 
+  test('listBookings returns empty list when client has no bookings', () async {
+    expect(await service.listBookings(clientId), isEmpty);
+  });
+
   test('cancelBooking early cancel restores slot seats', () async {
     final bookingRepo = BookingRepositoryMock(store: store);
     final bookingService = BookingServiceImpl(repository: bookingRepo);

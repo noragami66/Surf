@@ -24,3 +24,7 @@ final class RefreshMyBookingsEvent extends MyBookingsEvent {
   @override
   List<Object?> get props => [clientId];
 }
+
+final class ResetMyBookingsEvent extends MyBookingsEvent {
+  const ResetMyBookingsEvent();
+}
