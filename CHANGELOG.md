@@ -33,6 +33,7 @@ reference the same id.
 - (dev) Add CHANGELOG and `PLATF-XXX` commit message convention ([PLATF-003](CHANGELOG.md))
 - (dev) README: link to prompts folder and architecture docs ([PLATF-004](docs/tasks/task-01-architecture.md))
 - (dev) Application layer (NFR-ARCH-5), Deriverse-aligned Flutter structure, service specs in architecture docs ([PLATF-005](docs/tasks/task-01-architecture.md))
+- (dev) Doc review fixes: R registry, rental projection (R-023), config API, session refresh (UC-6), 3-design rename ([PLATF-006](docs/tasks/task-00-mvp-analysis.md))
 
 ### Fixed
 
@@ -47,3 +48,4 @@ reference the same id.
 | PLATF-003 | `fc5ac88` | CHANGELOG + правило `PLATF-XXX` в сообщениях коммитов |
 | PLATF-004 | `2b75ef1` | Data model, API contract, Flutter architecture, prompts link in README |
 | PLATF-005 | `f244e75` | Application layer, Deriverse structure alignment between BLoC and Repository, NFR-ARCH-5 |
+| PLATF-006 | `5fee9bb` | Review fixes: R registry, cancellation_window API, UC-6, 3-design rename |

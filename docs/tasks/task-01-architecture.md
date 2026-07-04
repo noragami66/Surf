@@ -7,16 +7,16 @@
 ## Требования
 
 - FR-9…FR-46, NFR-ARCH-1…5
-- [data-model.md](../01-analysis/4-design/data-model.md)
-- [api-contract.md](../01-analysis/4-design/api-contract.md)
+- [data-model.md](../01-analysis/3-design/data-model.md)
+- [api-contract.md](../01-analysis/3-design/api-contract.md)
 - [02-architecture.md](../02-architecture.md)
 
 ## Реализация
 
 | Артефакт | Содержание |
 | :-- | :-- |
-| `4-design/data-model.md` | Сущности, ERD, состояния, инварианты, Dart mapping |
-| `4-design/api-contract.md` | REST endpoints, query params, errors, mock strategy |
+| `3-design/data-model.md` | Сущности, ERD, состояния, инварианты, Dart mapping |
+| `3-design/api-contract.md` | REST endpoints, query params, errors, mock strategy |
 | `02-architecture.md` | Feature modules, **application layer**, DI, BLoC, navigation, data flow |
 
 ## Промпты
@@ -35,7 +35,7 @@
 - [x] Цепочка I_Repo → … → Widget задокументирована
 - [x] Application layer (`application/`, I*Service, *ServiceImpl) описан (NFR-ARCH-5)
 - [x] Mock strategy описана
-- [ ] **Студент:** согласен с feature split (auth / slots / booking / my_bookings)?
+- [x] **Студент:** согласен с feature split (auth / slots / booking / my_bookings) — да (2026-07-04)
 
 ## Commit
 

@@ -54,6 +54,23 @@
 
 ---
 
+## Prompt 11 — Ревью документов (2026-07-04)
+
+**Промпт:**
+
+> Провёл ревью пакета документов — 12 замечаний. Режим Q&A: rental projection, FR-13,
+> cancellation_window_minutes, риск R-001, R-реестр, 3-design rename, session refresh…
+
+**Решения студента:**
+
+- П.3: `cancellation_window_minutes`, дефолт 120
+- П.4: Phase 2 + открытый риск №1
+- П.11–12: Must silent refresh + `expires_in`
+- П.8: rename `4-design` → `3-design`
+- П.10: `flutter_secure_storage`
+
+---
+
 ## Использованные материалы
 
 | Источник | Путь |

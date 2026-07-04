@@ -29,10 +29,37 @@
 {
   "access_token": "...",
   "refresh_token": "...",
+  "expires_in": 3600,
+  "refresh_expires_in": 2592000,
   "is_new": true,
   "client": { "id": "uuid", "name": "", "phone": "+79991234567" }
 }
 ```
+
+> `expires_in` / `refresh_expires_in` — секунды до истечения (R-024). Клиент проактивно рефрешит access token.
+
+### refresh
+
+**Body:** `{ "refresh_token": "..." }`  
+**200:** `{ "access_token": "...", "refresh_token": "...", "expires_in": 3600, "refresh_expires_in": 2592000 }`
+
+**401:** refresh истёк → клиент выполняет logout (UC-6).
+
+## App config
+
+| Method | Path | Описание |
+| :-- | :-- | :-- |
+| GET | `/config` | Параметры бизнес-правил для клиента (read-only) |
+
+**200:**
+
+```json
+{
+  "cancellation_window_minutes": 120
+}
+```
+
+> Дефолт mock: **120** мин (R-021, не подтверждено заказчиком). Сервер решает `cancelled` vs `late_cancel` по этому окну.
 
 ## Programs & Masters (read-only)
 
@@ -118,7 +145,7 @@
 
 ### POST /bookings/{id}/cancel
 
-**200:** Booking со статусом `cancelled` или `late_cancel` (сервер решает по R-021).
+**200:** Booking со статусом `cancelled` или `late_cancel` (сервер сравнивает `slot.start_at - now` с `cancellation_window_minutes` из `/config`, R-021).
 
 ### Booking status enum
 
@@ -132,6 +159,14 @@
 | :-- | :-- | :-- |
 | GET | `/profile` | Текущий клиент |
 | PATCH | `/profile` | Обновить имя (после OTP для `is_new`) |
+
+## Общие ошибки HTTP
+
+| HTTP | code | Поведение клиента |
+| :-- | :-- | :-- |
+| 401 | `token_expired` | Silent refresh (UC-6) → один повтор запроса; при fail — logout |
+| 401 | `refresh_expired` | Logout, экран входа |
+| 403 | `forbidden` | Сообщение «нет доступа» |
 
 ## Mock-стратегия
 

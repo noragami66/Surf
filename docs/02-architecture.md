@@ -52,6 +52,16 @@ Widget → BLoC → I_Service → ServiceImpl → I_Repository → RepositoryImp
 - `BuildContext`, l10n, навигация → **presentation** (BLoC/Widget);
 - чистые формулы без I/O → **domain/use_cases** (опционально).
 
+### application vs domain/use_cases
+
+| Критерий | `domain/use_cases/` | `application/*ServiceImpl` |
+| :-- | :-- | :-- |
+| Зависимости | **Нет** `IRepository`, нет async I/O | Есть `IRepository`, async вызовы |
+| Пример | `maxSeatsForBooking(freeSeats)` — pure function | `createBooking()` — валидация + вызов repo |
+| Тесты | Unit без mock | Unit с mock repository |
+
+> Правило: если нужен repository — это **ServiceImpl**, не use_case.
+
 ### Интерфейс и реализация
 
 ```dart
@@ -86,7 +96,7 @@ class BookingServiceImpl implements IBookingService {
 
 | Feature | Interface | Impl | Ключевые методы |
 | :-- | :-- | :-- | :-- |
-| auth | `IAuthService` | `AuthServiceImpl` | `requestCode`, `verifyCode`, `setName`, `logout` |
+| auth | `IAuthService` | `AuthServiceImpl` | `requestCode`, `verifyCode`, `setName`, `refreshSession`, `logout` |
 | slots | `ISlotsService` | `SlotsServiceImpl` | `listSlots`, `getSlot` |
 | booking | `IBookingService` | `BookingServiceImpl` | `createBooking` |
 | my_bookings | `IMyBookingsService` | `MyBookingsServiceImpl` | `listBookings`, `getBooking`, `cancelBooking` |
@@ -241,6 +251,26 @@ locator.registerFactory<SlotsBloc>(
 
 Mock-реализации регистрируются по умолчанию; swap на `*RepositoryImpl` + HTTP — без смены BLoC/Service.
 
+## Auth & session (Must)
+
+| Компонент | Решение |
+| :-- | :-- |
+| Хранение токенов | `flutter_secure_storage` via `ITokenStorage` (R-025) |
+| Refresh | Silent refresh при 401 + proactive по `expires_in` (UC-6, FR-50) |
+| Logout | Очистка secure storage + `POST /auth/logout` |
+| Config | `GET /config` → `cancellation_window_minutes` (кэш в app) |
+
+```dart
+// features/auth/data/token_storage.dart
+abstract interface class ITokenStorage {
+  Future<void> saveTokens({required String access, required String refresh});
+  Future<String?> readAccessToken();
+  Future<void> clear();
+}
+```
+
+HTTP-клиент (data layer): interceptor на 401 → `AuthServiceImpl.refreshSession()` → retry once.
+
 ## Theme & l10n (Deriverse rules)
 
 | Правило | «Глина» |
@@ -317,7 +347,7 @@ sequenceDiagram
 ## Этап 3 (bootstrap)
 
 1. `flutter create app --org com.surf.glina`
-2. Зависимости: `flutter_bloc`, `equatable`, `get_it`, `go_router`, `intl`, `very_good_analysis`
+2. Зависимости: `flutter_bloc`, `equatable`, `get_it`, `go_router`, `intl`, `very_good_analysis`, **`flutter_secure_storage`**
 3. `dependency_injection/locator/locator.dart`, `core/style/`, `l10n/app_ru.arb`
 4. Feature-модули по шаблону выше (repo interfaces + mock repos + **service interfaces/impl**)
 5. `flutter analyze` — без новых warnings
@@ -332,9 +362,11 @@ sequenceDiagram
 - [ ] Регистрация в `locator.dart`
 - [ ] Trailing commas, package imports, English comments
 - [ ] CHANGELOG + PLATF-XXX commit
+- [ ] Tokens in `flutter_secure_storage`; UC-6 refresh flow
+- [ ] A11y smoke on auth/slots/booking screens (NFR-25)
 
 ## Связанные документы
 
-- [data-model.md](01-analysis/4-design/data-model.md)
-- [api-contract.md](01-analysis/4-design/api-contract.md)
+- [data-model.md](01-analysis/3-design/data-model.md)
+- [api-contract.md](01-analysis/3-design/api-contract.md)
 - [functional-requirements.md](01-analysis/2-requirements/functional-requirements.md)
