@@ -48,6 +48,31 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get slotsNoSeats => 'No seats left';
+
+  @override
+  String get slotsPeriodLabel => 'Next 7 days';
+
+  @override
+  String get slotsFilterHandbuilding => 'Handbuilding';
+
+  @override
+  String get slotsFilterWheel => 'Pottery wheel';
+
+  @override
+  String get slotsFilterOnlyAvailable => 'Available only';
+
+  @override
+  String get slotsFilterClear => 'Clear filters';
+
+  @override
+  String get slotsEmptyFilterTitle => 'No workshops match filters';
+
+  @override
+  String get slotsEmptyFilterSubtitle =>
+      'Try changing or clearing your filters';
+
+  @override
   String get myBookingsSubtitle => 'Your bookings and history';
 
   @override

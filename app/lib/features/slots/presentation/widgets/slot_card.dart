@@ -26,17 +26,24 @@ class SlotCard extends StatelessWidget {
       decimalDigits: 0,
     );
 
+    final isBookable = slot.isBookable;
+    final seatsLabel = isBookable
+        ? l10n.slotsSeatsAvailable(slot.freeSeats)
+        : l10n.slotsNoSeats;
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: () => context.push(AppRoutes.slotDetail(slot.id)),
         borderRadius: BorderRadius.circular(24),
-        child: GlassContainer(
-          margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.all(18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        child: Opacity(
+          opacity: isBookable ? 1 : 0.62,
+          child: GlassContainer(
+            margin: const EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -91,7 +98,8 @@ class SlotCard extends StatelessWidget {
                 children: [
                   _MetaChip(
                     icon: Icons.event_seat_outlined,
-                    label: l10n.slotsSeatsAvailable(slot.freeSeats),
+                    label: seatsLabel,
+                    highlight: !isBookable,
                   ),
                   const Spacer(),
                   Icon(
@@ -105,6 +113,7 @@ class SlotCard extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }
@@ -128,10 +137,15 @@ class _ProgramBadge extends StatelessWidget {
 }
 
 class _MetaChip extends StatelessWidget {
-  const _MetaChip({required this.icon, required this.label});
+  const _MetaChip({
+    required this.icon,
+    required this.label,
+    this.highlight = false,
+  });
 
   final IconData icon;
   final String label;
+  final bool highlight;
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +164,7 @@ class _MetaChip extends StatelessWidget {
           Text(
             label,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: Palette.textSecondary,
+              color: highlight ? Palette.ember : Palette.textSecondary,
               fontSize: 12,
             ),
           ),

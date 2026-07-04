@@ -158,6 +158,54 @@ abstract class AppLocalizations {
   /// **'{count, plural, one{{count} seat left} other{{count} seats left}}'**
   String slotsSeatsAvailable(int count);
 
+  /// No description provided for @slotsNoSeats.
+  ///
+  /// In en, this message translates to:
+  /// **'No seats left'**
+  String get slotsNoSeats;
+
+  /// No description provided for @slotsPeriodLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Next 7 days'**
+  String get slotsPeriodLabel;
+
+  /// No description provided for @slotsFilterHandbuilding.
+  ///
+  /// In en, this message translates to:
+  /// **'Handbuilding'**
+  String get slotsFilterHandbuilding;
+
+  /// No description provided for @slotsFilterWheel.
+  ///
+  /// In en, this message translates to:
+  /// **'Pottery wheel'**
+  String get slotsFilterWheel;
+
+  /// No description provided for @slotsFilterOnlyAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available only'**
+  String get slotsFilterOnlyAvailable;
+
+  /// No description provided for @slotsFilterClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear filters'**
+  String get slotsFilterClear;
+
+  /// No description provided for @slotsEmptyFilterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No workshops match filters'**
+  String get slotsEmptyFilterTitle;
+
+  /// No description provided for @slotsEmptyFilterSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Try changing or clearing your filters'**
+  String get slotsEmptyFilterSubtitle;
+
   /// No description provided for @myBookingsSubtitle.
   ///
   /// In en, this message translates to:

@@ -10,7 +10,7 @@ class _MockSlotsService extends Mock implements ISlotsService {}
 
 void main() {
   setUpAll(() {
-    registerFallbackValue(const SlotsFilter());
+    registerFallbackValue(SlotsFilter.defaultWeek());
   });
 
   final slot = SlotEntity(
@@ -33,10 +33,13 @@ void main() {
     status: SlotStatus.scheduled,
   );
 
+  const masters = [MasterEntity(id: 'm1', name: 'Anna')];
+
   late ISlotsService service;
 
   setUp(() {
     service = _MockSlotsService();
+    when(() => service.listMasters()).thenAnswer((_) async => masters);
     when(() => service.listSlots(any())).thenAnswer((_) async => [slot]);
   });
 
@@ -48,7 +51,8 @@ void main() {
       isA<SlotsState>().having((s) => s.status, 'status', SlotsStatus.loading),
       isA<SlotsState>()
           .having((s) => s.status, 'status', SlotsStatus.loaded)
-          .having((s) => s.slots, 'slots', hasLength(1)),
+          .having((s) => s.slots, 'slots', hasLength(1))
+          .having((s) => s.masters, 'masters', hasLength(1)),
     ],
   );
 
@@ -62,5 +66,42 @@ void main() {
       isA<SlotsState>().having((s) => s.status, 'status', SlotsStatus.loading),
       isA<SlotsState>().having((s) => s.status, 'status', SlotsStatus.empty),
     ],
+  );
+
+  blocTest<SlotsBloc, SlotsState>(
+    'ToggleOnlyAvailableFilterEvent updates filter and reloads',
+    build: () => SlotsBloc(service: service),
+    act: (bloc) => bloc.add(const ToggleOnlyAvailableFilterEvent()),
+    verify: (_) {
+      verify(
+        () => service.listSlots(
+          any(
+            that: predicate<SlotsFilter>(
+              (f) => f.onlyAvailable,
+            ),
+          ),
+        ),
+      ).called(1);
+    },
+  );
+
+  blocTest<SlotsBloc, SlotsState>(
+    'ClearSlotsFiltersEvent resets active filters',
+    build: () => SlotsBloc(service: service),
+    seed: () => SlotsState.initial().copyWith(
+      filter: SlotsFilter.defaultWeek().copyWith(onlyAvailable: true),
+    ),
+    act: (bloc) => bloc.add(const ClearSlotsFiltersEvent()),
+    verify: (_) {
+      verify(
+        () => service.listSlots(
+          any(
+            that: predicate<SlotsFilter>(
+              (f) => !f.hasActiveFilters,
+            ),
+          ),
+        ),
+      ).called(1);
+    },
   );
 }

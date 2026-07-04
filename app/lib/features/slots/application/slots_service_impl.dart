@@ -24,4 +24,10 @@ class SlotsServiceImpl implements ISlotsService {
     await _authService.ensureValidSession();
     return _repository.listSlots(filter);
   }
+
+  @override
+  Future<List<MasterEntity>> listMasters() async {
+    await _authService.ensureValidSession();
+    return _repository.listMasters();
+  }
 }

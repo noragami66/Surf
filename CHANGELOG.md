@@ -24,6 +24,7 @@ reference the same id.
 
 ### Added
 
+- Slots list: default 7-day window (R-027), filter chips (program, master, available), empty state for no filter matches, 14 seed slots ([PLATF-021](app/))
 - Quality (stage 7): expanded BLoC/repo tests (43 total), logout in header, pull-to-refresh on schedule, bug docs + manual checklist ([PLATF-016](docs/tasks/task-06-quality.md))
 - My Bookings list: `MyBookingsBloc`, `MyBookingsServiceImpl`, `listBookings` in mock repo, `BookingCard`, refresh after booking and on tab switch ([PLATF-015](docs/tasks/task-05-my-bookings.md))
 - My Bookings detail + cancel: `BookingDetailScreen`, `BookingDetailBloc`, `getBooking`/`cancelBooking`, route `/bookings/:id`, early/late cancel via `cancellation_window_minutes` mock ([PLATF-015](docs/tasks/task-05-my-bookings.md))
@@ -79,3 +80,4 @@ reference the same id.
 | PLATF-018 | — | Fix stale my bookings after logout |
 | PLATF-019 | — | Fix cancellation window Duration comparison |
 | PLATF-020 | — | UC-6 token refresh flow |
+| PLATF-021 | — | Slots 7-day window, filters, seed data |

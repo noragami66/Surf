@@ -17,6 +17,14 @@
       }
     }
   },
+  "slotsNoSeats": "Мест нет",
+  "slotsPeriodLabel": "Ближайшие 7 дней",
+  "slotsFilterHandbuilding": "Лепка",
+  "slotsFilterWheel": "Гончарный круг",
+  "slotsFilterOnlyAvailable": "Только свободные",
+  "slotsFilterClear": "Сбросить",
+  "slotsEmptyFilterTitle": "Нет слотов по фильтрам",
+  "slotsEmptyFilterSubtitle": "Попробуйте изменить или сбросить фильтры",
   "myBookingsSubtitle": "Ваши бронирования и история",
   "myBookingsEmptyTitle": "Записей пока нет",
   "myBookingsEmptySubtitle": "Выберите занятие в расписании и забронируйте место",

@@ -23,6 +23,14 @@
       }
     }
   },
+  "slotsNoSeats": "No seats left",
+  "slotsPeriodLabel": "Next 7 days",
+  "slotsFilterHandbuilding": "Handbuilding",
+  "slotsFilterWheel": "Pottery wheel",
+  "slotsFilterOnlyAvailable": "Available only",
+  "slotsFilterClear": "Clear filters",
+  "slotsEmptyFilterTitle": "No workshops match filters",
+  "slotsEmptyFilterSubtitle": "Try changing or clearing your filters",
   "myBookingsSubtitle": "Your bookings and history",
   "myBookingsEmptyTitle": "No bookings yet",
   "myBookingsEmptySubtitle": "Pick a workshop from the schedule to book a spot",

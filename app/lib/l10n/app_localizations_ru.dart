@@ -49,6 +49,31 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get slotsNoSeats => 'Мест нет';
+
+  @override
+  String get slotsPeriodLabel => 'Ближайшие 7 дней';
+
+  @override
+  String get slotsFilterHandbuilding => 'Лепка';
+
+  @override
+  String get slotsFilterWheel => 'Гончарный круг';
+
+  @override
+  String get slotsFilterOnlyAvailable => 'Только свободные';
+
+  @override
+  String get slotsFilterClear => 'Сбросить';
+
+  @override
+  String get slotsEmptyFilterTitle => 'Нет слотов по фильтрам';
+
+  @override
+  String get slotsEmptyFilterSubtitle =>
+      'Попробуйте изменить или сбросить фильтры';
+
+  @override
   String get myBookingsSubtitle => 'Ваши бронирования и история';
 
   @override

@@ -6,6 +6,7 @@ import 'package:glina/core/widgets/glass_empty_state.dart';
 import 'package:glina/core/widgets/home_user_header.dart';
 import 'package:glina/features/slots/presentation/manager/slots_bloc/slots_bloc.dart';
 import 'package:glina/features/slots/presentation/widgets/slot_card.dart';
+import 'package:glina/features/slots/presentation/widgets/slot_filters_bar.dart';
 import 'package:glina/l10n/app_localizations.dart';
 
 class SlotListScreen extends StatelessWidget {
@@ -55,6 +56,8 @@ class SlotListScreen extends StatelessWidget {
                             title: l10n.slotsSectionTitle,
                             subtitle: l10n.appTagline,
                           ),
+                          SizedBox(height: glass.sectionGap),
+                          const SlotFiltersBar(),
                         ],
                       ),
                     ),
@@ -68,9 +71,23 @@ class SlotListScreen extends StatelessWidget {
                     SlotsStatus.empty => SliverFillRemaining(
                       hasScrollBody: false,
                       child: GlassEmptyState(
-                        icon: Icons.calendar_month_outlined,
-                        title: l10n.slotsEmptyTitle,
-                        subtitle: l10n.slotsEmptySubtitle,
+                        icon: state.isEmptyDueToFilters
+                            ? Icons.filter_list_off_outlined
+                            : Icons.calendar_month_outlined,
+                        title: state.isEmptyDueToFilters
+                            ? l10n.slotsEmptyFilterTitle
+                            : l10n.slotsEmptyTitle,
+                        subtitle: state.isEmptyDueToFilters
+                            ? l10n.slotsEmptyFilterSubtitle
+                            : l10n.slotsEmptySubtitle,
+                        actionLabel: state.isEmptyDueToFilters
+                            ? l10n.slotsFilterClear
+                            : null,
+                        onAction: state.isEmptyDueToFilters
+                            ? () => context.read<SlotsBloc>().add(
+                                const ClearSlotsFiltersEvent(),
+                              )
+                            : null,
                       ),
                     ),
                     SlotsStatus.loaded => SliverPadding(
