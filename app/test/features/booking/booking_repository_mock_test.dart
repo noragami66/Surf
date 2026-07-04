@@ -59,12 +59,12 @@ void main() {
   test(
     'early cancel restores seats when outside cancellation window',
     () async {
-    setSlotStart(
-      0,
-      DateTime.now().add(
-        const Duration(minutes: AppConfigMock.cancellationWindowMinutes + 30),
-      ),
-    );
+      setSlotStart(
+        0,
+        DateTime.now().add(
+          const Duration(minutes: AppConfigMock.cancellationWindowMinutes + 30),
+        ),
+      );
 
       final created = await service.createBooking(
         clientId: clientId,
@@ -89,12 +89,12 @@ void main() {
   test(
     'late cancel does not restore seats inside cancellation window',
     () async {
-    setSlotStart(
-      0,
-      DateTime.now().add(
-        const Duration(minutes: AppConfigMock.cancellationWindowMinutes - 30),
-      ),
-    );
+      setSlotStart(
+        0,
+        DateTime.now().add(
+          const Duration(minutes: AppConfigMock.cancellationWindowMinutes - 30),
+        ),
+      );
 
       final created = await service.createBooking(
         clientId: clientId,
@@ -115,4 +115,26 @@ void main() {
       expect(store.slots.first.freeSeats, freeAfterBook);
     },
   );
+
+  test('early cancel at 121m30s is not truncated to late cancel', () async {
+    setSlotStart(
+      0,
+      DateTime.now().add(const Duration(minutes: 121, seconds: 30)),
+    );
+
+    final created = await service.createBooking(
+      clientId: clientId,
+      slotId: 'slot-1',
+      seatsCount: 1,
+      rentalCount: 0,
+      idempotencyKey: 'k4',
+    );
+
+    final cancelled = await repository.cancelBooking(
+      bookingId: created.id,
+      clientId: clientId,
+    );
+
+    expect(cancelled.status, BookingStatus.cancelled);
+  });
 }

@@ -136,9 +136,10 @@ class BookingRepositoryMock implements IBookingRepository {
       throw const BookingCancelSlotStartedException();
     }
 
-    final minutesUntilStart = slot.startAt.difference(DateTime.now()).inMinutes;
+    final minutesUntilStart = slot.startAt.difference(DateTime.now());
     final isEarlyCancel =
-        minutesUntilStart >= AppConfigMock.cancellationWindowMinutes;
+        minutesUntilStart >=
+        const Duration(minutes: AppConfigMock.cancellationWindowMinutes);
     final newStatus = isEarlyCancel
         ? BookingStatus.cancelled
         : BookingStatus.lateCancel;
