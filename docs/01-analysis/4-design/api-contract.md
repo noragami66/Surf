@@ -137,6 +137,7 @@
 
 1. `*RepositoryMock` хранит in-memory коллекции Slot/Booking/Client.
 2. Seed-данные: 2 программы, 4 мастера, ~15 слотов на 7 дней.
-3. `createBooking` / `cancelBooking` — атомарная проверка инвариантов.
-4. Искусственная задержка 200–500 ms для имитации сети.
-5. OTP: код `0000` в debug/mock.
+3. `createBooking` / `cancelBooking` — атомарная проверка инвариантов на уровне repo (конкурентность, счётчики).
+4. Клиентская валидация до вызова repo — в **`*ServiceImpl`** (application layer): `rental_count ≤ seats_count`, лимит мест, idempotency key.
+5. Искусственная задержка 200–500 ms для имитации сети.
+6. OTP: код `0000` в debug/mock.

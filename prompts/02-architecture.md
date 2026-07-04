@@ -34,7 +34,23 @@
 > Спроектируй Flutter Clean Architecture по правилам пользователя:
 > I_Repo → RepoImpl → I_Service → ServiceImpl → BLoC → Widget.
 > Feature modules: auth, slots, booking, my_bookings.
-> DI через get_it, mock repos, go_router navigation.
+> Обязательный слой application/ (I*Service, *ServiceImpl) между BLoC и Repository.
+> DI через get_it (locator.dart), mock repos, go_router navigation.
+
+---
+
+## Prompt 10 — Application layer (2026-07-04)
+
+**Промпт:**
+
+> Я забыл про application layer, добавь его.
+
+**Задача:**
+
+- Секция «Слой application» в `02-architecture.md` (ответственность, таблица сервисов, пример кода)
+- NFR-ARCH-5: `application/` обязателен в каждой feature
+- Маппинг слоёв в `data-model.md`, разделение валидации в `api-contract.md`
+- README, task-01, prompts обновлены
 
 ---
 

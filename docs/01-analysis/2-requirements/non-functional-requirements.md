@@ -26,5 +26,6 @@
 | :-- | :-- | :-- | :-- |
 | NFR-ARCH-1 | Архитектура | Clean Architecture: `I_Repo → RepoImpl → I_Service → ServiceImpl → BLoC → Widget`. | Must |
 | NFR-ARCH-2 | Архитектура | BLoC не обращается к Repository напрямую; Widget без бизнес-логики. | Must |
+| NFR-ARCH-5 | Application layer | Каждая feature содержит `application/` с `I*Service` и `*ServiceImpl`; BLoC зависит только от `I*Service`. | Must |
 | NFR-ARCH-3 | Данные | Mock-репозитории как источник данных на этапе разработки. | Must |
 | NFR-ARCH-4 | Локализация | UI-строки в l10n (ru). | Must |

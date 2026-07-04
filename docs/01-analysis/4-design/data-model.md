@@ -160,9 +160,9 @@ flowchart LR
 - `price_total` — только read-only от API (FR-45).
 - Параллельные брони — без овербукинга (NFR-8); в mock — in-memory lock / проверка.
 
-## Маппинг Dart (domain entities)
+## Маппинг Dart (слои)
 
-| API / модель | Dart entity | Слой |
+| Концепт | Dart type | Слой |
 | :-- | :-- | :-- |
 | Program | `ProgramEntity` | domain |
 | Master | `MasterEntity` | domain |
@@ -170,3 +170,9 @@ flowchart LR
 | Booking | `BookingEntity` | domain |
 | Client | `ClientEntity` | domain |
 | JSON DTO | `*Model` / `*Dto` | data |
+| Repository contract | `I*Repository` | domain/repositories |
+| Repository impl | `*RepositoryMock`, `*RepositoryImpl` | data/repositories |
+| Use-case orchestration | `I*Service`, `*ServiceImpl` | **application** |
+| UI state | `*Bloc`, `*Screen` | presentation |
+
+Бизнес-валидация (FR-13, FR-14, FR-22) — в **ServiceImpl**, не в BLoC и не в Repository.

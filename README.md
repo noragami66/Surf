@@ -42,7 +42,8 @@ CHANGELOG.md        — журнал изменений (формат Keep a Cha
 ## Стек (план)
 
 - Flutter + flutter_bloc
-- Clean Architecture: `I_Repo → RepoImpl → I_Service → ServiceImpl → BLoC → Widget`
+- Clean Architecture (4 слоя): domain / data / **application** / presentation  
+  Цепочка: `I_Repo → RepoImpl → I_Service → ServiceImpl → BLoC → Widget`
 - Mock-репозитории
 
 ## Инструменты
