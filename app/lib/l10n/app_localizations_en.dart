@@ -143,4 +143,96 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Log out';
+
+  @override
+  String get slotDetailNotFoundTitle => 'Workshop not found';
+
+  @override
+  String get slotDetailNotFoundSubtitle =>
+      'It may have been removed from the schedule';
+
+  @override
+  String get slotDetailDateTime => 'Date and time';
+
+  @override
+  String get slotDetailDuration => 'Duration';
+
+  @override
+  String slotDetailDurationMin(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get slotDetailAddress => 'Address';
+
+  @override
+  String get slotDetailSeats => 'Available seats';
+
+  @override
+  String get slotDetailRental => 'Rental kits';
+
+  @override
+  String slotDetailRentalAvailable(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count kits',
+      one: '$count kit',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get slotDetailPrice => 'Price per seat';
+
+  @override
+  String get slotDetailRentalPrice => 'Rental per kit';
+
+  @override
+  String get slotDetailBookCta => 'Book a spot';
+
+  @override
+  String get slotDetailBookUnavailable =>
+      'Booking is unavailable for this workshop';
+
+  @override
+  String get bookingTitle => 'Book a spot';
+
+  @override
+  String get bookingSeatsLabel => 'Number of seats';
+
+  @override
+  String get bookingRentalLabel => 'Rental kits';
+
+  @override
+  String get bookingRentalHint =>
+      'Rental includes apron and tools. Your own equipment is free.';
+
+  @override
+  String get bookingTotalLabel => 'Total';
+
+  @override
+  String get bookingSubmit => 'Confirm booking';
+
+  @override
+  String get bookingErrorSlotFull =>
+      'Not enough seats or rental kits. Adjust your selection.';
+
+  @override
+  String get bookingErrorDoubleBooking =>
+      'You already have a booking for this workshop';
+
+  @override
+  String get bookingErrorSlotCancelled =>
+      'This workshop was cancelled by the studio';
+
+  @override
+  String get bookingErrorSlotStarted => 'This workshop has already started';
+
+  @override
+  String get bookingErrorInvalidSeats => 'Choose between 1 and 3 seats';
+
+  @override
+  String get bookingErrorInvalidRental =>
+      'Rental count cannot exceed the number of seats';
 }

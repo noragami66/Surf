@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:glina/app/router.dart';
 import 'package:glina/core/style/palette.dart';
 import 'package:glina/core/widgets/glass_container.dart';
 import 'package:glina/core/widgets/glass_icon_badge.dart';
 import 'package:glina/features/slots/domain/entities/slot_entity.dart';
 import 'package:glina/features/slots/domain/enums/slot_enums.dart';
 import 'package:glina/l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class SlotCard extends StatelessWidget {
@@ -24,77 +26,84 @@ class SlotCard extends StatelessWidget {
       decimalDigits: 0,
     );
 
-    return GlassContainer(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => context.push(AppRoutes.slotDetail(slot.id)),
+        borderRadius: BorderRadius.circular(24),
+        child: GlassContainer(
+          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.all(18),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _ProgramBadge(type: slot.program.type),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      slot.program.name,
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        fontSize: 17,
-                      ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _ProgramBadge(type: slot.program.type),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          slot.program.name,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            fontSize: 17,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          slot.master.name,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            fontSize: 14,
+                            color: Palette.textMuted,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      slot.master.name,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        fontSize: 14,
-                        color: Palette.textMuted,
-                      ),
+                  ),
+                  Text(
+                    priceFormat.format(slot.priceAmount),
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      color: Palette.textPrimary,
+                      fontSize: 15,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Text(
-                priceFormat.format(slot.priceAmount),
-                style: theme.textTheme.labelLarge?.copyWith(
-                  color: Palette.textPrimary,
-                  fontSize: 15,
-                ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  _MetaChip(
+                    icon: Icons.calendar_today_outlined,
+                    label: dateFormat.format(slot.startAt),
+                  ),
+                  const SizedBox(width: 8),
+                  _MetaChip(
+                    icon: Icons.schedule_outlined,
+                    label: timeFormat.format(slot.startAt),
+                  ),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              _MetaChip(
-                icon: Icons.calendar_today_outlined,
-                label: dateFormat.format(slot.startAt),
-              ),
-              const SizedBox(width: 8),
-              _MetaChip(
-                icon: Icons.schedule_outlined,
-                label: timeFormat.format(slot.startAt),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              _MetaChip(
-                icon: Icons.event_seat_outlined,
-                label: l10n.slotsSeatsAvailable(slot.freeSeats),
-              ),
-              const Spacer(),
-              Icon(
-                Icons.arrow_forward_rounded,
-                color: Palette.textMuted.withValues(alpha: 0.8),
-                size: 18,
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  _MetaChip(
+                    icon: Icons.event_seat_outlined,
+                    label: l10n.slotsSeatsAvailable(slot.freeSeats),
+                  ),
+                  const Spacer(),
+                  Icon(
+                    Icons.arrow_forward_rounded,
+                    color: Palette.textMuted.withValues(alpha: 0.8),
+                    size: 18,
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

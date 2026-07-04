@@ -69,5 +69,44 @@
   "authErrorEmptyName": "Please enter your name",
   "authErrorNetwork": "Network error. Please try again",
   "authErrorGeneric": "Something went wrong. Please try again",
-  "logout": "Log out"
+  "logout": "Log out",
+  "slotDetailNotFoundTitle": "Workshop not found",
+  "slotDetailNotFoundSubtitle": "It may have been removed from the schedule",
+  "slotDetailDateTime": "Date and time",
+  "slotDetailDuration": "Duration",
+  "slotDetailDurationMin": "{minutes} min",
+  "@slotDetailDurationMin": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "slotDetailAddress": "Address",
+  "slotDetailSeats": "Available seats",
+  "slotDetailRental": "Rental kits",
+  "slotDetailRentalAvailable": "{count, plural, one{{count} kit} other{{count} kits}}",
+  "@slotDetailRentalAvailable": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "slotDetailPrice": "Price per seat",
+  "slotDetailRentalPrice": "Rental per kit",
+  "slotDetailBookCta": "Book a spot",
+  "slotDetailBookUnavailable": "Booking is unavailable for this workshop",
+  "bookingTitle": "Book a spot",
+  "bookingSeatsLabel": "Number of seats",
+  "bookingRentalLabel": "Rental kits",
+  "bookingRentalHint": "Rental includes apron and tools. Your own equipment is free.",
+  "bookingTotalLabel": "Total",
+  "bookingSubmit": "Confirm booking",
+  "bookingErrorSlotFull": "Not enough seats or rental kits. Adjust your selection.",
+  "bookingErrorDoubleBooking": "You already have a booking for this workshop",
+  "bookingErrorSlotCancelled": "This workshop was cancelled by the studio",
+  "bookingErrorSlotStarted": "This workshop has already started",
+  "bookingErrorInvalidSeats": "Choose between 1 and 3 seats",
+  "bookingErrorInvalidRental": "Rental count cannot exceed the number of seats"
 }

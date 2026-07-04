@@ -337,6 +337,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log out'**
   String get logout;
+
+  /// No description provided for @slotDetailNotFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Workshop not found'**
+  String get slotDetailNotFoundTitle;
+
+  /// No description provided for @slotDetailNotFoundSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'It may have been removed from the schedule'**
+  String get slotDetailNotFoundSubtitle;
+
+  /// No description provided for @slotDetailDateTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Date and time'**
+  String get slotDetailDateTime;
+
+  /// No description provided for @slotDetailDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get slotDetailDuration;
+
+  /// No description provided for @slotDetailDurationMin.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String slotDetailDurationMin(int minutes);
+
+  /// No description provided for @slotDetailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get slotDetailAddress;
+
+  /// No description provided for @slotDetailSeats.
+  ///
+  /// In en, this message translates to:
+  /// **'Available seats'**
+  String get slotDetailSeats;
+
+  /// No description provided for @slotDetailRental.
+  ///
+  /// In en, this message translates to:
+  /// **'Rental kits'**
+  String get slotDetailRental;
+
+  /// No description provided for @slotDetailRentalAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} kit} other{{count} kits}}'**
+  String slotDetailRentalAvailable(int count);
+
+  /// No description provided for @slotDetailPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price per seat'**
+  String get slotDetailPrice;
+
+  /// No description provided for @slotDetailRentalPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Rental per kit'**
+  String get slotDetailRentalPrice;
+
+  /// No description provided for @slotDetailBookCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Book a spot'**
+  String get slotDetailBookCta;
+
+  /// No description provided for @slotDetailBookUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking is unavailable for this workshop'**
+  String get slotDetailBookUnavailable;
+
+  /// No description provided for @bookingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Book a spot'**
+  String get bookingTitle;
+
+  /// No description provided for @bookingSeatsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Number of seats'**
+  String get bookingSeatsLabel;
+
+  /// No description provided for @bookingRentalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rental kits'**
+  String get bookingRentalLabel;
+
+  /// No description provided for @bookingRentalHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Rental includes apron and tools. Your own equipment is free.'**
+  String get bookingRentalHint;
+
+  /// No description provided for @bookingTotalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get bookingTotalLabel;
+
+  /// No description provided for @bookingSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm booking'**
+  String get bookingSubmit;
+
+  /// No description provided for @bookingErrorSlotFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough seats or rental kits. Adjust your selection.'**
+  String get bookingErrorSlotFull;
+
+  /// No description provided for @bookingErrorDoubleBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'You already have a booking for this workshop'**
+  String get bookingErrorDoubleBooking;
+
+  /// No description provided for @bookingErrorSlotCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'This workshop was cancelled by the studio'**
+  String get bookingErrorSlotCancelled;
+
+  /// No description provided for @bookingErrorSlotStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'This workshop has already started'**
+  String get bookingErrorSlotStarted;
+
+  /// No description provided for @bookingErrorInvalidSeats.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose between 1 and 3 seats'**
+  String get bookingErrorInvalidSeats;
+
+  /// No description provided for @bookingErrorInvalidRental.
+  ///
+  /// In en, this message translates to:
+  /// **'Rental count cannot exceed the number of seats'**
+  String get bookingErrorInvalidRental;
 }
 
 class _AppLocalizationsDelegate

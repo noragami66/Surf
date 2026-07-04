@@ -144,4 +144,95 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get logout => 'Выйти';
+
+  @override
+  String get slotDetailNotFoundTitle => 'Занятие не найдено';
+
+  @override
+  String get slotDetailNotFoundSubtitle => 'Возможно, его убрали из расписания';
+
+  @override
+  String get slotDetailDateTime => 'Дата и время';
+
+  @override
+  String get slotDetailDuration => 'Длительность';
+
+  @override
+  String slotDetailDurationMin(int minutes) {
+    return '$minutes мин';
+  }
+
+  @override
+  String get slotDetailAddress => 'Адрес';
+
+  @override
+  String get slotDetailSeats => 'Свободные места';
+
+  @override
+  String get slotDetailRental => 'Прокатные комплекты';
+
+  @override
+  String slotDetailRentalAvailable(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count комплектов',
+      many: '$count комплектов',
+      few: '$count комплекта',
+      one: '$count комплект',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get slotDetailPrice => 'Цена за место';
+
+  @override
+  String get slotDetailRentalPrice => 'Прокат за комплект';
+
+  @override
+  String get slotDetailBookCta => 'Записаться';
+
+  @override
+  String get slotDetailBookUnavailable => 'Запись на это занятие недоступна';
+
+  @override
+  String get bookingTitle => 'Запись на занятие';
+
+  @override
+  String get bookingSeatsLabel => 'Количество мест';
+
+  @override
+  String get bookingRentalLabel => 'Прокатные комплекты';
+
+  @override
+  String get bookingRentalHint =>
+      'Прокат — фартук и инструменты. Своё оборудование бесплатно.';
+
+  @override
+  String get bookingTotalLabel => 'Итого';
+
+  @override
+  String get bookingSubmit => 'Подтвердить запись';
+
+  @override
+  String get bookingErrorSlotFull =>
+      'Недостаточно мест или проката. Измените выбор.';
+
+  @override
+  String get bookingErrorDoubleBooking =>
+      'У вас уже есть запись на это занятие';
+
+  @override
+  String get bookingErrorSlotCancelled => 'Занятие отменено мастерской';
+
+  @override
+  String get bookingErrorSlotStarted => 'Занятие уже началось';
+
+  @override
+  String get bookingErrorInvalidSeats => 'Выберите от 1 до 3 мест';
+
+  @override
+  String get bookingErrorInvalidRental =>
+      'Прокат не может превышать число мест';
 }

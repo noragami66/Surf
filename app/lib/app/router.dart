@@ -8,10 +8,14 @@ import 'package:glina/features/auth/presentation/screens/auth_splash_screen.dart
 import 'package:glina/features/auth/presentation/screens/login_screen.dart';
 import 'package:glina/features/auth/presentation/screens/name_screen.dart';
 import 'package:glina/features/auth/presentation/screens/otp_screen.dart';
+import 'package:glina/features/booking/presentation/screens/booking_screen.dart';
 import 'package:glina/features/my_bookings/presentation/screens/my_bookings_screen.dart';
+import 'package:glina/features/slots/presentation/screens/slot_detail_screen.dart';
 import 'package:glina/features/slots/presentation/screens/slot_list_screen.dart';
 import 'package:glina/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 abstract final class AppRoutes {
   static const splash = '/';
@@ -20,11 +24,15 @@ abstract final class AppRoutes {
   static const name = '/auth/name';
   static const slots = '/slots';
   static const bookings = '/bookings';
+
+  static String slotDetail(String id) => '/slots/$id';
+  static String slotBook(String id) => '/slots/$id/book';
 }
 
 /// Builds the router with an auth redirect driven by [authBloc] state.
 GoRouter createRouter(AuthBloc authBloc) {
   return GoRouter(
+    navigatorKey: _rootNavigatorKey,
     initialLocation: AppRoutes.splash,
     refreshListenable: _BlocListenable(authBloc.stream),
     redirect: (context, state) =>
@@ -47,6 +55,22 @@ GoRouter createRouter(AuthBloc authBloc) {
               GoRoute(
                 path: AppRoutes.slots,
                 builder: (context, state) => const SlotListScreen(),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) =>
+                        SlotDetailScreen(slotId: state.pathParameters['id']!),
+                    routes: [
+                      GoRoute(
+                        path: 'book',
+                        parentNavigatorKey: _rootNavigatorKey,
+                        builder: (context, state) =>
+                            BookingScreen(slotId: state.pathParameters['id']!),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
