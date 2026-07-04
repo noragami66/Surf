@@ -13,3 +13,5 @@
 | [Stale slots after booking](bug-01-stale-slots-after-booking.md) | PLATF-017 | ✅ fixed |
 | [Stale bookings after logout](bug-02-stale-bookings-after-logout.md) | PLATF-018 | ✅ fixed |
 | [Cancel window truncation](bug-03-cancel-window-truncation.md) | PLATF-019 | ✅ fixed |
+
+Ручная проверка MVP: [manual-test-checklist.md](manual-test-checklist.md) (17 пунктов, ✅).

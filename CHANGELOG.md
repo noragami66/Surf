@@ -25,7 +25,7 @@ reference the same id.
 ### Added
 
 - Slots list: default 7-day window (R-027), filter chips (program, master, available), empty state for no filter matches, 14 seed slots ([PLATF-021](app/))
-- Quality (stage 7): expanded BLoC/repo tests (43 total), logout in header, pull-to-refresh on schedule, bug docs + manual checklist ([PLATF-016](docs/tasks/task-06-quality.md))
+- Quality (stage 7): expanded BLoC/repo tests (56 total), logout in header, pull-to-refresh on schedule, bug docs + manual checklist ([PLATF-016](docs/tasks/task-06-quality.md))
 - My Bookings list: `MyBookingsBloc`, `MyBookingsServiceImpl`, `listBookings` in mock repo, `BookingCard`, refresh after booking and on tab switch ([PLATF-015](docs/tasks/task-05-my-bookings.md))
 - My Bookings detail + cancel: `BookingDetailScreen`, `BookingDetailBloc`, `getBooking`/`cancelBooking`, route `/bookings/:id`, early/late cancel via `cancellation_window_minutes` mock ([PLATF-015](docs/tasks/task-05-my-bookings.md))
 - Slots detail + booking slice: `SlotDetailScreen`, `BookingScreen`, `SlotDetailBloc`, `BookingBloc`, `BookingServiceImpl`, `BookingRepositoryMock`, shared `MockSlotStore`, routes `/slots/:id` and `/slots/:id/book`, unit + bloc tests ([PLATF-014](docs/tasks/task-04-slots-booking.md))
@@ -38,6 +38,7 @@ reference the same id.
 
 ### Changed
 
+- Sync README, app README, analysis/prompts docs, manual checklist (56 tests, PLATF-021 status) ([PLATF-022](README.md))
 - (dev) Refine MVP after review: auth OTP Must (UC-5), US-16 workshop cancellation, R-021 cancel policy, brief program names, rental kits=8, error matrix, FR-22 idempotency ([PLATF-002](docs/tasks/task-00-mvp-analysis.md))
 - (dev) Add CHANGELOG and `PLATF-XXX` commit message convention ([PLATF-003](CHANGELOG.md))
 - (dev) README: link to prompts folder and architecture docs ([PLATF-004](docs/tasks/task-01-architecture.md))
@@ -81,3 +82,4 @@ reference the same id.
 | PLATF-019 | — | Fix cancellation window Duration comparison |
 | PLATF-020 | — | UC-6 token refresh flow |
 | PLATF-021 | — | Slots 7-day window, filters, seed data |
+| PLATF-022 | — | Docs sync: README status, manual checklist, test counts |

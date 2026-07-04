@@ -6,16 +6,19 @@
 
 | Этап | Статус |
 | :-- | :-- |
-| 1. MVP / Анализ | ✅ |
-| 2. Архитектура | ✅ |
-| 3. Flutter bootstrap + UI | ✅ PLATF-009…010 |
-| 4. Auth (OTP) | ✅ PLATF-012 |
+| 1. MVP / Анализ | ✅ PLATF-001…003 |
+| 2. Архитектура | ✅ PLATF-004…008 |
+| 3. Flutter bootstrap + UI | ✅ PLATF-009, 010, 013 |
+| 4. Auth (OTP + UC-6 refresh) | ✅ PLATF-012, 020 |
 | 5. Slots detail + Booking | ✅ PLATF-014 |
 | 6. My bookings + cancel | ✅ PLATF-015 |
 | 7. Тесты + баги (3) | ✅ PLATF-016…019 |
-| UC-6 token refresh | ✅ PLATF-020 |
+| Slots: 7 дней + фильтры | ✅ PLATF-021 |
 
-> **Этап 7:** unit/bloc-тесты, polish, **3 бага** — см. [docs/bugs/README.md](docs/bugs/README.md).
+> **Этап 7:** unit/bloc-тесты (56), polish, **3 бага** — см. [docs/bugs/README.md](docs/bugs/README.md).  
+> **Ручная проверка:** [manual-test-checklist.md](docs/bugs/manual-test-checklist.md).
+
+Мета-документация: handoff-промпт — [PLATF-011](prompts/04-continue-handoff.md).
 
 ## Соответствие нумерации этапов
 
@@ -29,11 +32,11 @@
 
 ```
 docs/01-analysis/   — артефакты аналитики (День 1)
-docs/tasks/         — документы по задачам задания
-docs/bugs/          — намеренные баги этапа 7
-prompts/            — промпты для AI
-app/                — Flutter-проект (этап 3+)
-CHANGELOG.md        — журнал изменений (формат Keep a Changelog)
+docs/tasks/           — документы по задачам задания
+docs/bugs/            — намеренные баги этапа 7 + manual checklist
+prompts/              — промпты для AI
+app/                  — Flutter-проект (этап 3+)
+CHANGELOG.md          — журнал изменений (формат Keep a Changelog)
 ```
 
 ## Коммиты
@@ -44,6 +47,7 @@ CHANGELOG.md        — журнал изменений (формат Keep a Cha
 
 - [CHANGELOG](CHANGELOG.md)
 - [Промпты (AI)](prompts/README.md) — все промпты по этапам
+- [Manual test checklist](docs/bugs/manual-test-checklist.md)
 - [README аналитики](docs/01-analysis/README.md)
 - [Модель данных](docs/01-analysis/3-design/data-model.md)
 - [API-контракт](docs/01-analysis/3-design/api-contract.md)
@@ -60,12 +64,12 @@ CHANGELOG.md        — журнал изменений (формат Keep a Cha
 - [Bugs (этап 7)](docs/bugs/README.md)
 - [App README (run)](app/README.md)
 
-## Стек (план)
+## Стек
 
 - Flutter + flutter_bloc
 - Clean Architecture (4 слоя): domain / data / **application** / presentation  
   Цепочка: `I_Repo → RepoImpl → I_Service → ServiceImpl → BLoC → Widget`
-- Mock-репозитории
+- Mock-репозитории, `flutter_secure_storage`
 
 ## Инструменты
 
