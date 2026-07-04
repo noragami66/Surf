@@ -17,27 +17,31 @@
 presentation → application → domain ← data
 ```
 
-3. **Цепочка вызовов (обязательно для этого проекта):**
+1. **Цепочка вызовов (обязательно для этого проекта):**
 
 ```
 Widget → BLoC → I_Service → ServiceImpl → I_Repository → RepositoryImpl/Mock → data source
 ```
 
-4. BLoC вызывает **I_Service**, не Repository.
-5. Widget **без** бизнес-логики.
-6. **domain** — без Flutter, data sources, presentation.
-7. **application** — оркестрация use cases; зависит только от **domain** (интерфейсы репозиториев и entities).
+1. BLoC вызывает **I_Service**, не Repository.
+2. Widget **без** бизнес-логики.
+3. **domain** — без Flutter, data sources, presentation.
+4. **application** — оркестрация use cases; зависит только от **domain** (интерфейсы репозиториев и entities).
+
+
 
 ## Слой application (обязательный)
 
 Папка `features/<name>/application/` — **не опциональна**. Это слой между presentation и data.
 
-| Слой | Ответственность | Пример «Глина» |
-| :-- | :-- | :-- |
-| **domain** | Контракты и сущности | `ISlotsRepository`, `SlotEntity` |
-| **data** | I/O, DTO, mock/API | `SlotsRepositoryMock`, `SlotModel` |
-| **application** | Бизнес-правила, оркестрация | `ISlotsService`, `SlotsServiceImpl` |
-| **presentation** | UI-состояние | `SlotsBloc`, `SlotListScreen` |
+
+| Слой             | Ответственность             | Пример «Глина»                      |
+| ---------------- | --------------------------- | ----------------------------------- |
+| **domain**       | Контракты и сущности        | `ISlotsRepository`, `SlotEntity`    |
+| **data**         | I/O, DTO, mock/API          | `SlotsRepositoryMock`, `SlotModel`  |
+| **application**  | Бизнес-правила, оркестрация | `ISlotsService`, `SlotsServiceImpl` |
+| **presentation** | UI-состояние                | `SlotsBloc`, `SlotListScreen`       |
+
 
 **В application (ServiceImpl):**
 
@@ -52,15 +56,21 @@ Widget → BLoC → I_Service → ServiceImpl → I_Repository → RepositoryImp
 - `BuildContext`, l10n, навигация → **presentation** (BLoC/Widget);
 - чистые формулы без I/O → **domain/use_cases** (опционально).
 
+
+
 ### application vs domain/use_cases
 
-| Критерий | `domain/use_cases/` | `application/*ServiceImpl` |
-| :-- | :-- | :-- |
-| Зависимости | **Нет** `IRepository`, нет async I/O | Есть `IRepository`, async вызовы |
-| Пример | `maxSeatsForBooking(freeSeats)` — pure function | `createBooking()` — валидация + вызов repo |
-| Тесты | Unit без mock | Unit с mock repository |
+
+| Критерий    | `domain/use_cases/`                             | `application/*ServiceImpl`                 |
+| ----------- | ----------------------------------------------- | ------------------------------------------ |
+| Зависимости | **Нет** `IRepository`, нет async I/O            | Есть `IRepository`, async вызовы           |
+| Пример      | `maxSeatsForBooking(freeSeats)` — pure function | `createBooking()` — валидация + вызов repo |
+| Тесты       | Unit без mock                                   | Unit с mock repository                     |
+
 
 > Правило: если нужен repository — это **ServiceImpl**, не use_case.
+
+
 
 ### Интерфейс и реализация
 
@@ -92,16 +102,22 @@ class BookingServiceImpl implements IBookingService {
 }
 ```
 
+
+
 ### Сервисы по feature (MVP)
 
-| Feature | Interface | Impl | Ключевые методы |
-| :-- | :-- | :-- | :-- |
-| auth | `IAuthService` | `AuthServiceImpl` | `requestCode`, `verifyCode`, `setName`, `refreshSession`, `logout` |
-| slots | `ISlotsService` | `SlotsServiceImpl` | `listSlots`, `getSlot` |
-| booking | `IBookingService` | `BookingServiceImpl` | `createBooking` |
-| my_bookings | `IMyBookingsService` | `MyBookingsServiceImpl` | `listBookings`, `getBooking`, `cancelBooking` |
+
+| Feature     | Interface            | Impl                    | Ключевые методы                                                    |
+| ----------- | -------------------- | ----------------------- | ------------------------------------------------------------------ |
+| auth        | `IAuthService`       | `AuthServiceImpl`       | `requestCode`, `verifyCode`, `setName`, `refreshSession`, `logout` |
+| slots       | `ISlotsService`      | `SlotsServiceImpl`      | `listSlots`, `getSlot`                                             |
+| booking     | `IBookingService`    | `BookingServiceImpl`    | `createBooking`                                                    |
+| my_bookings | `IMyBookingsService` | `MyBookingsServiceImpl` | `listBookings`, `getBooking`, `cancelBooking`                      |
+
 
 > `IBookingRepository` общий для booking и my_bookings; сервисы разделены по use case (создание vs просмотр/отмена).
+
+
 
 ## Структура проекта (целевая)
 
@@ -133,6 +149,8 @@ app/
         ├── my_bookings/
         └── profile/               # Should
 ```
+
+
 
 ## Feature module (шаблон — Deriverse + application layer)
 
@@ -175,16 +193,20 @@ features/slots/
 > **Отличие от «чистого» Deriverse:** слой `application/` обязателен (BLoC → Service → Repo).
 > В Deriverse `statistics_data` уже использует этот паттерн.
 
+
+
 ## Feature modules (MVP)
 
-| Feature | US/UC | Repository | Service | BLoC | Экраны |
-| :-- | :-- | :-- | :-- | :-- | :-- |
-| **auth** | US-1, UC-5 | `IAuthRepository` | `IAuthService` | `AuthBloc` | Login, OTP, Name |
-| **slots** | US-2,3,4 UC-3 | `ISlotsRepository` | `ISlotsService` | `SlotsBloc` | SlotList, SlotDetail |
-| **booking** | US-5–8 UC-1 | `IBookingRepository`* | `IBookingService` | `BookingBloc` | BookingForm, Success |
-| **my_bookings** | US-9,10,16 UC-2,4 | `IBookingRepository` | `IMyBookingsService` | `MyBookingsBloc` | List, Detail, Cancel |
 
-\* Один `IBookingRepository` — разные сервисы (create vs list/cancel).
+| Feature         | US/UC             | Repository            | Service              | BLoC             | Экраны               |
+| --------------- | ----------------- | --------------------- | -------------------- | ---------------- | -------------------- |
+| **auth**        | US-1, UC-5        | `IAuthRepository`     | `IAuthService`       | `AuthBloc`       | Login, OTP, Name     |
+| **slots**       | US-2,3,4 UC-3     | `ISlotsRepository`    | `ISlotsService`      | `SlotsBloc`      | SlotList, SlotDetail |
+| **booking**     | US-5–8 UC-1       | `IBookingRepository`* | `IBookingService`    | `BookingBloc`    | BookingForm, Success |
+| **my_bookings** | US-9,10,16 UC-2,4 | `IBookingRepository`  | `IMyBookingsService` | `MyBookingsBloc` | List, Detail, Cancel |
+
+
+ Один `IBookingRepository` — разные сервисы (create vs list/cancel).
 
 ## BLoC conventions (Deriverse)
 
@@ -219,6 +241,8 @@ part 'slots_state.dart';
 - `switch (event)` — pattern matching
 - Подписки отменять в `close()`
 
+
+
 ## Repository pattern
 
 ```dart
@@ -234,6 +258,8 @@ class SlotsRepositoryMock implements ISlotsRepository { ... }
 - Интерфейс — **domain/repositories/**
 - Реализация — **data/repositories/** (`*Mock`, `*Impl`, `*Stub`)
 - Mock data — **data/data_sources/local/** или внутри mock repo
+
+
 
 ## Dependency Injection (GetIt)
 
@@ -253,12 +279,14 @@ Mock-реализации регистрируются по умолчанию; 
 
 ## Auth & session (Must)
 
-| Компонент | Решение |
-| :-- | :-- |
-| Хранение токенов | `flutter_secure_storage` via `ITokenStorage` (R-025) |
-| Refresh | Silent refresh при 401 + proactive по `expires_in` (UC-6, FR-50) |
-| Logout | Очистка secure storage + `POST /auth/logout` |
-| Config | `GET /config` → `cancellation_window_minutes` (кэш в app) |
+
+| Компонент        | Решение                                                          |
+| ---------------- | ---------------------------------------------------------------- |
+| Хранение токенов | `flutter_secure_storage` via `ITokenStorage` (R-025)             |
+| Refresh          | Silent refresh при 401 + proactive по `expires_in` (UC-6, FR-50) |
+| Logout           | Очистка secure storage + `POST /auth/logout`                     |
+| Config           | `GET /config` → `cancellation_window_minutes` (кэш в app)        |
+
 
 ```dart
 // features/auth/data/token_storage.dart
@@ -273,14 +301,18 @@ HTTP-клиент (data layer): interceptor на 401 → `AuthServiceImpl.refres
 
 ## Theme & l10n (Deriverse rules)
 
-| Правило | «Глина» |
-| :-- | :-- |
-| No magic numbers | цвета/размеры через `ThemeExtension` + `palette.dart` |
-| l10n | все UI-строки в `lib/l10n/app_ru.arb` (минимум ru; en — source для gen-l10n) |
-| Comments | **English only** in code |
-| Imports | **package:glina/...** only, not relative `../` |
-| Format | `dart format`, page width **80**, trailing commas |
-| Analyze | Very Good Analysis, zero new warnings |
+
+| Правило          | «Глина»                                                                      |
+| ---------------- | ---------------------------------------------------------------------------- |
+| No magic numbers | цвета/размеры через `ThemeExtension` + `palette.dart`                        |
+| l10n             | все UI-строки в `lib/l10n/app_ru.arb` (минимум ru; en — source для gen-l10n) |
+| Comments         | **English only** in code                                                     |
+| Imports          | **package:glina/...** only, not relative `../`                               |
+| Format           | `dart format`, page width **80**, trailing commas                            |
+| Analyze          | Very Good Analysis, zero new warnings                                        |
+
+
+
 
 ## Test Panel
 
@@ -303,6 +335,10 @@ flowchart TD
     MyBookings -->|tap| BookingDetail[BookingDetailScreen]
 ```
 
+
+
+
+
 ## Data flow (пример: запись на слот)
 
 ```mermaid
@@ -320,6 +356,10 @@ sequenceDiagram
     B-->>W: BookingSuccess / BookingFailure
 ```
 
+
+
+
+
 ## Mapping API ↔ Domain
 
 - **data/models** — JSON-serializable DTO (`SlotModel`).
@@ -327,46 +367,61 @@ sequenceDiagram
 - **ServiceImpl** — бизнес-правила: валидация `rental_count ≤ seats_count`, проброс кодов ошибок.
 - **BLoC** — маппинг Failure → user-facing message (l10n).
 
+
+
 ## State management (BLoC)
 
-| BLoC | Events (пример) | States (пример) |
-| :-- | :-- | :-- |
-| AuthBloc | RequestCode, VerifyCode, SetName | Initial, Loading, CodeSent, Authenticated, Error |
-| SlotsBloc | Load, ApplyFilters, Refresh | Loading, Loaded, Empty, Error |
-| BookingBloc | SetSeats, SetRental, Submit | Editing, Submitting, Success, Error(slot_full) |
-| MyBookingsBloc | Load, Cancel | Loading, Loaded, Cancelling, Error |
+
+| BLoC           | Events (пример)                  | States (пример)                                  |
+| -------------- | -------------------------------- | ------------------------------------------------ |
+| AuthBloc       | RequestCode, VerifyCode, SetName | Initial, Loading, CodeSent, Authenticated, Error |
+| SlotsBloc      | Load, ApplyFilters, Refresh      | Loading, Loaded, Empty, Error                    |
+| BookingBloc    | SetSeats, SetRental, Submit      | Editing, Submitting, Success, Error(slot_full)   |
+| MyBookingsBloc | Load, Cancel                     | Loading, Loaded, Cancelling, Error               |
+
+
+
 
 ## Тестирование (план)
 
-| Уровень | Что |
-| :-- | :-- |
-| Service | unit-тесты с mock repository |
-| BLoC | bloc_test |
-| Widget | smoke на dev_panel (по мере готовности) |
+
+| Уровень | Что                                     |
+| ------- | --------------------------------------- |
+| Service | unit-тесты с mock repository            |
+| BLoC    | bloc_test                               |
+| Widget  | smoke на dev_panel (по мере готовности) |
+
+
+
 
 ## Этап 3 (bootstrap)
 
 1. `flutter create app --org com.surf.glina`
-2. Зависимости: `flutter_bloc`, `equatable`, `get_it`, `go_router`, `intl`, `very_good_analysis`, **`flutter_secure_storage`**
+2. Зависимости: `flutter_bloc`, `equatable`, `get_it`, `go_router`, `intl`, `very_good_analysis`, `flutter_secure_storage`
 3. `dependency_injection/locator/locator.dart`, `core/style/`, `l10n/app_ru.arb`
 4. Feature-модули по шаблону выше (repo interfaces + mock repos + **service interfaces/impl**)
 5. `flutter analyze` — без новых warnings
 
-## Checklist перед merge (Deriverse)
 
-- [ ] domain / data / application / presentation структура
-- [ ] `I*` в domain, `*Impl`/`*Mock` в data
-- [ ] BLoC → Service → Repository (не напрямую к repo)
-- [ ] ThemeExtension, без magic numbers
-- [ ] Строки в l10n
-- [ ] Регистрация в `locator.dart`
-- [ ] Trailing commas, package imports, English comments
-- [ ] CHANGELOG + PLATF-XXX commit
-- [ ] Tokens in `flutter_secure_storage`; UC-6 refresh flow
-- [ ] A11y smoke on auth/slots/booking screens (NFR-25)
+
+## Checklist перед merge
+
+- [x] domain / data / application / presentation структура
+- [x] `I*` в domain, `*Impl`/`*Mock` в data
+- [x] BLoC → Service → Repository (не напрямую к repo)
+- [x] ThemeExtension, без magic numbers
+- [x] Строки в l10n
+- [x] Регистрация в `locator.dart`
+- [x] Trailing commas, package imports, English comments
+- [x] CHANGELOG + PLATF-XXX commit
+- [x] Tokens in `flutter_secure_storage`; UC-6 refresh flow
+- [x] A11y smoke on auth/slots/booking screens (NFR-25)
+
+
 
 ## Связанные документы
 
 - [data-model.md](01-analysis/3-design/data-model.md)
 - [api-contract.md](01-analysis/3-design/api-contract.md)
 - [functional-requirements.md](01-analysis/2-requirements/functional-requirements.md)
+
