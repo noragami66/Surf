@@ -134,8 +134,8 @@ erDiagram
 ```mermaid
 flowchart LR
     Start((●)) --> active
-    active -->|ранняя отмена ge 2h| cancelled
-    active -->|поздняя отмена lt 2h| late_cancel
+    active -->|ранняя отмена ≥ окна| cancelled
+    active -->|поздняя отмена < окна| late_cancel
     active -->|слот отменён мастерской| workshop_cancelled
     cancelled --> End((◉))
     late_cancel --> End
