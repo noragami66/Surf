@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:glina/app/router.dart';
+import 'package:glina/core/auth/session_auth_bridge.dart';
 import 'package:glina/core/style/app_theme.dart';
 import 'package:glina/dependency_injection/locator/locator.dart';
 import 'package:glina/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
@@ -25,11 +26,17 @@ class _GlinaAppState extends State<GlinaApp> {
   void initState() {
     super.initState();
     _authBloc = locator<AuthBloc>()..add(const AuthStarted());
+    locator<SessionAuthBridge>().onSessionExpired = () {
+      if (!_authBloc.isClosed) {
+        _authBloc.add(const AuthSessionExpired());
+      }
+    };
     _router = createRouter(_authBloc);
   }
 
   @override
   void dispose() {
+    locator<SessionAuthBridge>().onSessionExpired = null;
     _authBloc.close();
     super.dispose();
   }

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:glina/core/auth/session_auth_bridge.dart';
 import 'package:glina/features/auth/application/auth_service_impl.dart';
 import 'package:glina/features/auth/application/i_auth_service.dart';
 import 'package:glina/features/auth/data/repositories/auth_repository_mock.dart';
@@ -26,15 +27,20 @@ final GetIt locator = GetIt.instance;
 
 Future<void> setupLocator() async {
   locator
+    ..registerLazySingleton<SessionAuthBridge>(SessionAuthBridge.new)
     ..registerLazySingleton<ITokenStorage>(SecureTokenStorage.new)
     ..registerLazySingleton<IAuthRepository>(AuthRepositoryMock.new)
     ..registerLazySingleton<IAuthService>(
-      () => AuthServiceImpl(repository: locator(), tokenStorage: locator()),
+      () => AuthServiceImpl(
+        repository: locator(),
+        tokenStorage: locator(),
+        sessionBridge: locator(),
+      ),
     )
     ..registerFactory<AuthBloc>(() => AuthBloc(service: locator()))
     ..registerLazySingleton<ISlotsRepository>(SlotsRepositoryMock.new)
     ..registerLazySingleton<ISlotsService>(
-      () => SlotsServiceImpl(repository: locator()),
+      () => SlotsServiceImpl(repository: locator(), authService: locator()),
     )
     ..registerFactory<SlotsBloc>(() => SlotsBloc(service: locator()))
     ..registerFactoryParam<SlotDetailBloc, String, void>(
@@ -42,7 +48,7 @@ Future<void> setupLocator() async {
     )
     ..registerLazySingleton<IBookingRepository>(BookingRepositoryMock.new)
     ..registerLazySingleton<IBookingService>(
-      () => BookingServiceImpl(repository: locator()),
+      () => BookingServiceImpl(repository: locator(), authService: locator()),
     )
     ..registerFactoryParam<BookingBloc, String, String>(
       (slotId, clientId) => BookingBloc(
@@ -56,6 +62,7 @@ Future<void> setupLocator() async {
       () => MyBookingsServiceImpl(
         bookingRepository: locator(),
         slotsRepository: locator(),
+        authService: locator(),
       ),
     )
     ..registerFactory<MyBookingsBloc>(() => MyBookingsBloc(service: locator()))

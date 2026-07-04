@@ -13,6 +13,7 @@ class SecureTokenStorage implements ITokenStorage {
   static const _accessKey = 'access_token';
   static const _refreshKey = 'refresh_token';
   static const _clientKey = 'client';
+  static const _accessExpiresKey = 'access_expires_at';
 
   final FlutterSecureStorage _storage;
 
@@ -21,6 +22,24 @@ class SecureTokenStorage implements ITokenStorage {
     await _storage.delete(key: _accessKey);
     await _storage.delete(key: _refreshKey);
     await _storage.delete(key: _clientKey);
+    await _storage.delete(key: _accessExpiresKey);
+  }
+
+  @override
+  Future<DateTime?> readAccessExpiresAt() async {
+    final raw = await _storage.read(key: _accessExpiresKey);
+    if (raw == null) {
+      return null;
+    }
+    return DateTime.tryParse(raw);
+  }
+
+  @override
+  Future<void> saveAccessExpiresAt(DateTime expiresAt) async {
+    await _storage.write(
+      key: _accessExpiresKey,
+      value: expiresAt.toUtc().toIso8601String(),
+    );
   }
 
   @override

@@ -5,6 +5,7 @@ import 'package:glina/features/booking/data/repositories/booking_repository_mock
 import 'package:glina/features/booking/domain/enums/booking_enums.dart';
 import 'package:glina/features/slots/data/mock_slot_store.dart';
 import 'package:glina/features/slots/domain/entities/slot_entity.dart';
+import '../../support/mock_auth_service.dart';
 
 void main() {
   const clientId = 'client-1';
@@ -16,7 +17,10 @@ void main() {
   setUp(() {
     store = MockSlotStore.instance..reset();
     repository = BookingRepositoryMock(store: store);
-    service = BookingServiceImpl(repository: repository);
+    service = BookingServiceImpl(
+      repository: repository,
+      authService: stubAuthService(),
+    );
   });
 
   void setSlotStart(int index, DateTime startAt) {

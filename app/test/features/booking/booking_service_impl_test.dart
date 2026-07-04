@@ -3,6 +3,7 @@ import 'package:glina/core/exception/app_exception.dart';
 import 'package:glina/features/booking/application/booking_service_impl.dart';
 import 'package:glina/features/booking/data/repositories/booking_repository_mock.dart';
 import 'package:glina/features/slots/data/mock_slot_store.dart';
+import '../../support/mock_auth_service.dart';
 
 void main() {
   const clientId = 'client-1';
@@ -16,6 +17,7 @@ void main() {
     store = MockSlotStore.instance..reset();
     service = BookingServiceImpl(
       repository: BookingRepositoryMock(store: store),
+      authService: stubAuthService(),
     );
   });
 

@@ -7,6 +7,11 @@ abstract interface class ITokenStorage {
     required String refreshToken,
   });
 
+  /// When the current access token expires (UTC).
+  Future<void> saveAccessExpiresAt(DateTime expiresAt);
+
+  Future<DateTime?> readAccessExpiresAt();
+
   Future<String?> readAccessToken();
 
   Future<String?> readRefreshToken();

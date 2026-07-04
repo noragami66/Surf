@@ -29,7 +29,7 @@
 - [x] Структура папок по architecture doc
 - [x] `flutter analyze` — no issues
 - [x] `flutter test` — pass
-- [ ] **Студент:** `flutter run` — видны вкладки Slots / Bookings, empty state на слотах
+- [x] **Студент:** `flutter run` — см. [manual-test-checklist.md](../bugs/manual-test-checklist.md)
 
 ## Commit
 

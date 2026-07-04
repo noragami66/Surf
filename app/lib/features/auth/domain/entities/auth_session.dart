@@ -6,6 +6,7 @@ class AuthSession extends Equatable {
   const AuthSession({
     required this.accessToken,
     required this.refreshToken,
+    required this.expiresIn,
     required this.isNew,
     required this.client,
   });
@@ -13,11 +14,20 @@ class AuthSession extends Equatable {
   final String accessToken;
   final String refreshToken;
 
+  /// Access token lifetime in seconds (`expires_in` from api-contract).
+  final int expiresIn;
+
   /// `is_new` — client must provide a name before entering the app (UC-5.3).
   final bool isNew;
 
   final ClientEntity client;
 
   @override
-  List<Object?> get props => [accessToken, refreshToken, isNew, client];
+  List<Object?> get props => [
+    accessToken,
+    refreshToken,
+    expiresIn,
+    isNew,
+    client,
+  ];
 }

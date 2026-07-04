@@ -47,6 +47,11 @@ final class AuthLoggedOut extends AuthEvent {
   const AuthLoggedOut();
 }
 
+/// Session dropped because refresh expired (UC-6 E1).
+final class AuthSessionExpired extends AuthEvent {
+  const AuthSessionExpired();
+}
+
 /// Returns the flow to the phone entry step (e.g. "change number").
 final class AuthReset extends AuthEvent {
   const AuthReset();

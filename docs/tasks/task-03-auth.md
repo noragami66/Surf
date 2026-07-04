@@ -49,7 +49,7 @@ Widget (Login/Otp/Name) → AuthBloc → IAuthService → AuthServiceImpl
 | `AuthCodeRequested(phone)` | `unauthenticated` |
 | `AuthCodeVerified(code)` | `codeSent` |
 | `AuthNameSubmitted(name)` | `needName` (is_new) |
-| `AuthLoggedOut` | `authenticated` |
+| `AuthLoggedOut` / `AuthSessionExpired` | → `unauthenticated` |
 | — | `failure` (сообщение) + под-статус loading |
 
 `AuthState` хранит: `status`, `phone`, `client`, `errorCode`, `isSubmitting`.
@@ -69,15 +69,25 @@ Widget (Login/Otp/Name) → AuthBloc → IAuthService → AuthServiceImpl
 - `redirect`: если `status == unknown` — splash; если `unauthenticated`/`codeSent`/
   `needName` — держим на `/auth/*`; если `authenticated` — пускаем в `/slots`.
 
+## UC-6 (PLATF-020)
+
+- `ITokenStorage.saveAccessExpiresAt` — хранит `expires_in` из verify/refresh.
+- `AuthServiceImpl.ensureValidSession()` — проактивный refresh до истечения access
+  token (skew 30 s); при `refresh_expired` — очистка storage + `SessionAuthBridge`.
+- `restoreSession()` — refresh на cold start, если access истёк.
+- Сервисы slots/booking/my_bookings вызывают `ensureValidSession()` перед mock API.
+- `AuthSessionExpired` → router redirect на login.
+
 ## Проверка
 
-- [ ] `flutter analyze` — 0 issues (very_good_analysis)
-- [ ] `flutter test` — pass (AuthServiceImpl + AuthBloc)
-- [ ] `dart format` — clean
+- [x] `flutter analyze` — 0 issues (very_good_analysis)
+- [x] `flutter test` — pass (AuthServiceImpl UC-6 + AuthBloc)
+- [x] `dart format` — clean
 - [ ] **Студент:** `flutter run` — phone → `0000` → имя → слоты; logout → снова вход
 
-## Commit
+## Commits
 
 ```
 PLATF-012: feat(auth): OTP login flow, session guard, secure token storage
+PLATF-020: feat(auth): UC-6 token refresh on startup and before API calls
 ```

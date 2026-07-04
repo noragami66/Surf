@@ -73,8 +73,7 @@ class AuthRepositoryMock implements IAuthRepository {
   @override
   Future<AuthSession> refresh(String refreshToken) async {
     await Future<void>.delayed(_latency);
-    // Mock always accepts a non-empty refresh token.
-    if (refreshToken.isEmpty) {
+    if (refreshToken.isEmpty || refreshToken == 'mock-refresh-revoked') {
       throw const SessionExpiredException();
     }
     final client = _clients.values.isNotEmpty

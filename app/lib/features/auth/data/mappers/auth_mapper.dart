@@ -15,6 +15,7 @@ extension AuthTokensModelMapper on AuthTokensModel {
   AuthSession toEntity() => AuthSession(
     accessToken: accessToken,
     refreshToken: refreshToken,
+    expiresIn: expiresIn,
     isNew: isNew,
     client: client.toEntity(),
   );

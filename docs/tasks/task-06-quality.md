@@ -40,4 +40,5 @@ PLATF-016: test(quality): expand bloc/repo tests, logout, pull-to-refresh
 PLATF-017: fix(slots): refresh schedule after booking and cancel
 PLATF-018: fix(my_bookings): reset list state on logout
 PLATF-019: fix(booking): use Duration for cancellation window comparison
+PLATF-020: feat(auth): UC-6 token refresh on startup and before API calls
 ```

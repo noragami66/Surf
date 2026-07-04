@@ -13,6 +13,7 @@
 | 5. Slots detail + Booking | ✅ PLATF-014 |
 | 6. My bookings + cancel | ✅ PLATF-015 |
 | 7. Тесты + баги (3) | ✅ PLATF-016…019 |
+| UC-6 token refresh | ✅ PLATF-020 |
 
 > **Этап 7:** unit/bloc-тесты, polish, **3 бага** — см. [docs/bugs/README.md](docs/bugs/README.md).
 
@@ -52,7 +53,11 @@ CHANGELOG.md        — журнал изменений (формат Keep a Cha
 - [Task 00: MVP](docs/tasks/task-00-mvp-analysis.md)
 - [Task 01: Architecture](docs/tasks/task-01-architecture.md)
 - [Task 02: Flutter bootstrap](docs/tasks/task-02-flutter-bootstrap.md)
-- [Task 06: Quality](docs/tasks/task-06-quality.md)
+- [Task 03: Auth (OTP)](docs/tasks/task-03-auth.md)
+- [Task 04: Slots + Booking](docs/tasks/task-04-slots-booking.md)
+- [Task 05: My Bookings](docs/tasks/task-05-my-bookings.md)
+- [Task 06: Quality + bugs](docs/tasks/task-06-quality.md)
+- [Bugs (этап 7)](docs/bugs/README.md)
 - [App README (run)](app/README.md)
 
 ## Стек (план)

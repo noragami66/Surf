@@ -47,6 +47,7 @@ reference the same id.
 
 ### Fixed
 
+- UC-6: proactive access token refresh on cold start and before protected API calls; logout on `refresh_expired` ([PLATF-020](docs/tasks/task-03-auth.md))
 - Schedule stale `free_seats` after booking/cancel — auto `RefreshSlotsEvent` ([PLATF-017](docs/bugs/bug-01-stale-slots-after-booking.md))
 - My Bookings list not cleared on logout — `ResetMyBookingsEvent` via auth listener ([PLATF-018](docs/bugs/bug-02-stale-bookings-after-logout.md))
 - Early/late cancel window used truncated `inMinutes` — compare full `Duration` ([PLATF-019](docs/bugs/bug-03-cancel-window-truncation.md))
@@ -77,3 +78,4 @@ reference the same id.
 | PLATF-017 | — | Fix stale slots after booking/cancel |
 | PLATF-018 | — | Fix stale my bookings after logout |
 | PLATF-019 | — | Fix cancellation window Duration comparison |
+| PLATF-020 | — | UC-6 token refresh flow |

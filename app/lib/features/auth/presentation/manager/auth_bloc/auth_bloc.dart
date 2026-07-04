@@ -16,6 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthCodeVerified>(_onCodeVerified);
     on<AuthNameSubmitted>(_onNameSubmitted);
     on<AuthLoggedOut>(_onLoggedOut);
+    on<AuthSessionExpired>(_onSessionExpired);
     on<AuthReset>(_onReset);
   }
 
@@ -93,6 +94,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     await _service.logout();
+    emit(const AuthState.unauthenticated());
+  }
+
+  Future<void> _onSessionExpired(
+    AuthSessionExpired event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(const AuthState.unauthenticated());
   }
 

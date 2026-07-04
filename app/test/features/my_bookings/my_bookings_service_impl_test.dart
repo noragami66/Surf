@@ -6,6 +6,8 @@ import 'package:glina/features/my_bookings/application/my_bookings_service_impl.
 import 'package:glina/features/slots/data/mock_slot_store.dart';
 import 'package:glina/features/slots/data/repositories/slots_repository_mock.dart';
 
+import '../../support/mock_auth_service.dart';
+
 void main() {
   const clientId = 'client-1';
   const otherClientId = 'client-2';
@@ -21,6 +23,7 @@ void main() {
     service = MyBookingsServiceImpl(
       bookingRepository: bookingRepo,
       slotsRepository: SlotsRepositoryMock(store: store),
+      authService: stubAuthService(),
     );
   });
 
@@ -29,6 +32,7 @@ void main() {
     () async {
       final bookingService = BookingServiceImpl(
         repository: BookingRepositoryMock(store: store),
+        authService: stubAuthService(),
       );
 
       await bookingService.createBooking(
@@ -61,10 +65,14 @@ void main() {
 
   test('cancelBooking early cancel restores slot seats', () async {
     final bookingRepo = BookingRepositoryMock(store: store);
-    final bookingService = BookingServiceImpl(repository: bookingRepo);
+    final bookingService = BookingServiceImpl(
+      repository: bookingRepo,
+      authService: stubAuthService(),
+    );
     service = MyBookingsServiceImpl(
       bookingRepository: bookingRepo,
       slotsRepository: SlotsRepositoryMock(store: store),
+      authService: stubAuthService(),
     );
 
     final freeBefore = store.slots.first.freeSeats;

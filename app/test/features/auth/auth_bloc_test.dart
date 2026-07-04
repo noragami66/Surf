@@ -17,12 +17,14 @@ void main() {
   const newSession = AuthSession(
     accessToken: 'a',
     refreshToken: 'r',
+    expiresIn: 3600,
     isNew: true,
     client: newClient,
   );
   const returningSession = AuthSession(
     accessToken: 'a',
     refreshToken: 'r',
+    expiresIn: 3600,
     isNew: false,
     client: namedClient,
   );
@@ -59,6 +61,15 @@ void main() {
           AuthStatus.unauthenticated,
         ),
       ],
+    );
+  });
+
+  group('AuthSessionExpired', () {
+    blocTest<AuthBloc, AuthState>(
+      'emits unauthenticated when session expires externally',
+      build: () => AuthBloc(service: service),
+      act: (bloc) => bloc.add(const AuthSessionExpired()),
+      expect: () => [const AuthState.unauthenticated()],
     );
   });
 

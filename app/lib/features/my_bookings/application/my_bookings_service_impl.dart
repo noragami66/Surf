@@ -1,3 +1,4 @@
+import 'package:glina/features/auth/application/i_auth_service.dart';
 import 'package:glina/features/booking/domain/entities/booking_entity.dart';
 import 'package:glina/features/booking/domain/repositories/i_booking_repository.dart';
 import 'package:glina/features/my_bookings/application/i_my_bookings_service.dart';
@@ -8,14 +9,18 @@ class MyBookingsServiceImpl implements IMyBookingsService {
   MyBookingsServiceImpl({
     required IBookingRepository bookingRepository,
     required ISlotsRepository slotsRepository,
+    required IAuthService authService,
   }) : _bookingRepository = bookingRepository,
-       _slotsRepository = slotsRepository;
+       _slotsRepository = slotsRepository,
+       _authService = authService;
 
   final IBookingRepository _bookingRepository;
   final ISlotsRepository _slotsRepository;
+  final IAuthService _authService;
 
   @override
   Future<List<BookingListItemEntity>> listBookings(String clientId) async {
+    await _authService.ensureValidSession();
     final bookings = await _bookingRepository.listBookings(clientId: clientId);
     return _enrich(bookings);
   }
@@ -25,6 +30,7 @@ class MyBookingsServiceImpl implements IMyBookingsService {
     required String bookingId,
     required String clientId,
   }) async {
+    await _authService.ensureValidSession();
     final booking = await _bookingRepository.getBooking(
       bookingId: bookingId,
       clientId: clientId,
@@ -38,6 +44,7 @@ class MyBookingsServiceImpl implements IMyBookingsService {
     required String bookingId,
     required String clientId,
   }) async {
+    await _authService.ensureValidSession();
     final booking = await _bookingRepository.cancelBooking(
       bookingId: bookingId,
       clientId: clientId,

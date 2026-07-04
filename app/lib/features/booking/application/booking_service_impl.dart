@@ -1,4 +1,5 @@
 import 'package:glina/core/exception/app_exception.dart';
+import 'package:glina/features/auth/application/i_auth_service.dart';
 import 'package:glina/features/booking/application/i_booking_service.dart';
 import 'package:glina/features/booking/domain/entities/booking_entity.dart';
 import 'package:glina/features/booking/domain/repositories/i_booking_repository.dart';
@@ -7,10 +8,14 @@ import 'package:glina/features/booking/domain/repositories/i_booking_repository.
 const maxSeatsPerBooking = 3;
 
 class BookingServiceImpl implements IBookingService {
-  BookingServiceImpl({required IBookingRepository repository})
-    : _repository = repository;
+  BookingServiceImpl({
+    required IBookingRepository repository,
+    required IAuthService authService,
+  }) : _repository = repository,
+       _authService = authService;
 
   final IBookingRepository _repository;
+  final IAuthService _authService;
 
   @override
   Future<BookingEntity> createBooking({
@@ -20,6 +25,8 @@ class BookingServiceImpl implements IBookingService {
     required int rentalCount,
     required String idempotencyKey,
   }) async {
+    await _authService.ensureValidSession();
+
     if (seatsCount < 1 || seatsCount > maxSeatsPerBooking) {
       throw const InvalidSeatsCountException();
     }

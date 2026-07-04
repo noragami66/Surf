@@ -6,6 +6,11 @@ abstract interface class IAuthService {
   /// Returns the persisted client if a valid session exists (UC-6 startup).
   Future<ClientEntity?> restoreSession();
 
+  /// Proactively refreshes an expired access token (UC-6).
+  ///
+  /// Throws when refresh is unavailable (UC-6 E1 — code `refresh_expired`).
+  Future<void> ensureValidSession();
+
   /// Requests an OTP for [phone] (UC-5.1).
   Future<void> requestCode(String phone);
 
