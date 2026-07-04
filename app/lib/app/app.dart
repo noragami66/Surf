@@ -44,20 +44,28 @@ class _GlinaAppState extends State<GlinaApp> {
         ),
         BlocProvider<MyBookingsBloc>(create: (_) => locator<MyBookingsBloc>()),
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'Glina',
-        theme: buildAppTheme(),
-        themeMode: ThemeMode.dark,
-        locale: const Locale('ru'),
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        routerConfig: _router,
+      child: BlocListener<AuthBloc, AuthState>(
+        listenWhen: (previous, current) =>
+            previous.status != current.status &&
+            current.status == AuthStatus.unauthenticated,
+        listener: (context, state) {
+          context.read<MyBookingsBloc>().add(const ResetMyBookingsEvent());
+        },
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Glina',
+          theme: buildAppTheme(),
+          themeMode: ThemeMode.dark,
+          locale: const Locale('ru'),
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          routerConfig: _router,
+        ),
       ),
     );
   }
