@@ -1,64 +1,142 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:glina/core/widgets/ambient_background.dart';
 import 'package:glina/core/widgets/glass_bottom_nav.dart';
+import 'package:glina/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
+import 'package:glina/features/auth/presentation/screens/auth_splash_screen.dart';
+import 'package:glina/features/auth/presentation/screens/login_screen.dart';
+import 'package:glina/features/auth/presentation/screens/name_screen.dart';
+import 'package:glina/features/auth/presentation/screens/otp_screen.dart';
 import 'package:glina/features/my_bookings/presentation/screens/my_bookings_screen.dart';
 import 'package:glina/features/slots/presentation/screens/slot_list_screen.dart';
 import 'package:glina/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-final GoRouter appRouter = GoRouter(
-  initialLocation: '/slots',
-  routes: [
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
-        final l10n = AppLocalizations.of(context)!;
+abstract final class AppRoutes {
+  static const splash = '/';
+  static const login = '/auth/phone';
+  static const otp = '/auth/otp';
+  static const name = '/auth/name';
+  static const slots = '/slots';
+  static const bookings = '/bookings';
+}
 
-        return Scaffold(
-          extendBody: true,
-          backgroundColor: Colors.transparent,
-          body: Stack(
-            fit: StackFit.expand,
-            children: [
-              const AmbientBackground(),
-              navigationShell,
+/// Builds the router with an auth redirect driven by [authBloc] state.
+GoRouter createRouter(AuthBloc authBloc) {
+  return GoRouter(
+    initialLocation: AppRoutes.splash,
+    refreshListenable: _BlocListenable(authBloc.stream),
+    redirect: (context, state) =>
+        _redirect(authBloc.state, state.matchedLocation),
+    routes: [
+      GoRoute(
+        path: AppRoutes.splash,
+        builder: (_, __) => const AuthSplashScreen(),
+      ),
+      GoRoute(path: AppRoutes.login, builder: (_, __) => const LoginScreen()),
+      GoRoute(path: AppRoutes.otp, builder: (_, __) => const OtpScreen()),
+      GoRoute(path: AppRoutes.name, builder: (_, __) => const NameScreen()),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return _HomeShell(navigationShell: navigationShell);
+        },
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.slots,
+                builder: (context, state) => const SlotListScreen(),
+              ),
             ],
           ),
-          bottomNavigationBar: GlassBottomNav(
-            selectedIndex: navigationShell.currentIndex,
-            onDestinationSelected: navigationShell.goBranch,
-            destinations: [
-              GlassNavDestination(
-                icon: Icons.calendar_month_outlined,
-                selectedIcon: Icons.calendar_month,
-                label: l10n.slotsTab,
-              ),
-              GlassNavDestination(
-                icon: Icons.event_note_outlined,
-                selectedIcon: Icons.event_note,
-                label: l10n.myBookingsTab,
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.bookings,
+                builder: (context, state) => const MyBookingsScreen(),
               ),
             ],
           ),
-        );
-      },
-      branches: [
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/slots',
-              builder: (context, state) => const SlotListScreen(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/bookings',
-              builder: (context, state) => const MyBookingsScreen(),
-            ),
-          ],
-        ),
-      ],
-    ),
-  ],
-);
+        ],
+      ),
+    ],
+  );
+}
+
+String? _redirect(AuthState auth, String location) {
+  final target = switch (auth.status) {
+    AuthStatus.unknown => AppRoutes.splash,
+    AuthStatus.unauthenticated => AppRoutes.login,
+    AuthStatus.codeSent => AppRoutes.otp,
+    AuthStatus.needName => AppRoutes.name,
+    AuthStatus.authenticated => null,
+  };
+
+  if (target != null) {
+    return location == target ? null : target;
+  }
+
+  // Authenticated: keep out of auth/splash routes.
+  const authRoutes = {
+    AppRoutes.splash,
+    AppRoutes.login,
+    AppRoutes.otp,
+    AppRoutes.name,
+  };
+  if (authRoutes.contains(location)) {
+    return AppRoutes.slots;
+  }
+  return null;
+}
+
+/// Bridges a BLoC state stream to a go_router [Listenable].
+class _BlocListenable extends ChangeNotifier {
+  _BlocListenable(Stream<AuthState> stream) {
+    _subscription = stream.listen((_) => notifyListeners());
+  }
+
+  late final StreamSubscription<AuthState> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}
+
+class _HomeShell extends StatelessWidget {
+  const _HomeShell({required this.navigationShell});
+
+  final StatefulNavigationShell navigationShell;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Scaffold(
+      extendBody: true,
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [const AmbientBackground(), navigationShell],
+      ),
+      bottomNavigationBar: GlassBottomNav(
+        selectedIndex: navigationShell.currentIndex,
+        onDestinationSelected: navigationShell.goBranch,
+        destinations: [
+          GlassNavDestination(
+            icon: Icons.calendar_month_outlined,
+            selectedIcon: Icons.calendar_month,
+            label: l10n.slotsTab,
+          ),
+          GlassNavDestination(
+            icon: Icons.event_note_outlined,
+            selectedIcon: Icons.event_note,
+            label: l10n.myBookingsTab,
+          ),
+        ],
+      ),
+    );
+  }
+}

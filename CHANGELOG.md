@@ -28,6 +28,7 @@ reference the same id.
 - (dev) Architecture phase: data model, API contract, Flutter Clean Architecture plan ([PLATF-004](docs/tasks/task-01-architecture.md))
 - Flutter bootstrap: `app/` project, Clean Architecture skeleton, slots empty-state slice ([PLATF-009](docs/tasks/task-02-flutter-bootstrap.md))
 - Dark glassmorphism design system: palette, theme extensions, ambient background, glass widgets, slots screen redesign ([PLATF-010](app/))
+- Auth (OTP) slice: AuthBloc, phone → OTP → name glass screens, router session guard, AuthRepositoryMock (code `0000`, rate limit), session persistence in secure storage, unit + bloc tests ([PLATF-012](docs/tasks/task-03-auth.md))
 
 ### Changed
 
@@ -56,3 +57,6 @@ reference the same id.
 | PLATF-007 | `6dc2e63` | Booking state mermaid: cancellation window labels |
 | PLATF-008 | `b4975ea` | Fix prompts link in README |
 | PLATF-009 | — | Flutter bootstrap: glina app, DI, l10n, slots slice |
+| PLATF-010 | — | Dark glassmorphism design system |
+| PLATF-011 | — | Handoff doc for stage 4 continuation |
+| PLATF-012 | — | Auth OTP flow: bloc, screens, router guard, secure session, tests |

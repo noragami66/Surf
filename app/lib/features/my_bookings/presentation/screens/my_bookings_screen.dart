@@ -72,9 +72,7 @@ class MyBookingsScreen extends StatelessWidget {
                     Text(
                       l10n.myBookingsEmptySubtitle,
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        fontSize: 14,
-                      ),
+                      style: theme.textTheme.bodyLarge?.copyWith(fontSize: 14),
                     ),
                   ],
                 ),

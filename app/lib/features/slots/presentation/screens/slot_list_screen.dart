@@ -55,11 +55,11 @@ class SlotListScreen extends StatelessWidget {
                   ),
                 ),
                 switch (state.status) {
-                  SlotsStatus.initial || SlotsStatus.loading =>
-                    SliverFillRemaining(
-                      hasScrollBody: false,
-                      child: _LoadingState(message: l10n.loading),
-                    ),
+                  SlotsStatus.initial ||
+                  SlotsStatus.loading => SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: _LoadingState(message: l10n.loading),
+                  ),
                   SlotsStatus.empty => SliverFillRemaining(
                     hasScrollBody: false,
                     child: _EmptyState(

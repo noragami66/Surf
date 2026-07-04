@@ -181,6 +181,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading…'**
   String get loading;
+
+  /// Login screen heading
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Glina'**
+  String get authPhoneTitle;
+
+  /// No description provided for @authPhoneSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your phone number to sign in or create an account'**
+  String get authPhoneSubtitle;
+
+  /// No description provided for @authPhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get authPhoneLabel;
+
+  /// No description provided for @authPhoneHint.
+  ///
+  /// In en, this message translates to:
+  /// **'+7 000 000 00 00'**
+  String get authPhoneHint;
+
+  /// No description provided for @authContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get authContinue;
+
+  /// No description provided for @authOtpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm your number'**
+  String get authOtpTitle;
+
+  /// No description provided for @authOtpSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a 4-digit code to {phone}'**
+  String authOtpSubtitle(String phone);
+
+  /// No description provided for @authOtpHintMock.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock code: 0000'**
+  String get authOtpHintMock;
+
+  /// No description provided for @authVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get authVerify;
+
+  /// No description provided for @authChangeNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Change number'**
+  String get authChangeNumber;
+
+  /// No description provided for @authResendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code'**
+  String get authResendCode;
+
+  /// No description provided for @authNameTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How should we call you?'**
+  String get authNameTitle;
+
+  /// No description provided for @authNameSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your name to finish setting up your account'**
+  String get authNameSubtitle;
+
+  /// No description provided for @authNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get authNameLabel;
+
+  /// No description provided for @authNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Anna'**
+  String get authNameHint;
+
+  /// No description provided for @authFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get authFinish;
+
+  /// No description provided for @authErrorInvalidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone number'**
+  String get authErrorInvalidPhone;
+
+  /// No description provided for @authErrorInvalidCode.
+  ///
+  /// In en, this message translates to:
+  /// **'The code is incorrect. Try again'**
+  String get authErrorInvalidCode;
+
+  /// No description provided for @authErrorRateLimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Please wait a moment'**
+  String get authErrorRateLimited;
+
+  /// No description provided for @authErrorEmptyName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your name'**
+  String get authErrorEmptyName;
+
+  /// No description provided for @authErrorNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Please try again'**
+  String get authErrorNetwork;
+
+  /// No description provided for @authErrorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again'**
+  String get authErrorGeneric;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logout;
 }
 
 class _AppLocalizationsDelegate

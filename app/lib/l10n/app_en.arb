@@ -26,5 +26,38 @@
   "myBookingsSubtitle": "Your bookings and history",
   "myBookingsEmptyTitle": "No bookings yet",
   "myBookingsEmptySubtitle": "Pick a workshop from the schedule to book a spot",
-  "loading": "Loading…"
+  "loading": "Loading…",
+  "authPhoneTitle": "Welcome to Glina",
+  "@authPhoneTitle": {
+    "description": "Login screen heading"
+  },
+  "authPhoneSubtitle": "Enter your phone number to sign in or create an account",
+  "authPhoneLabel": "Phone number",
+  "authPhoneHint": "+7 000 000 00 00",
+  "authContinue": "Continue",
+  "authOtpTitle": "Confirm your number",
+  "authOtpSubtitle": "We sent a 4-digit code to {phone}",
+  "@authOtpSubtitle": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "authOtpHintMock": "Mock code: 0000",
+  "authVerify": "Verify",
+  "authChangeNumber": "Change number",
+  "authResendCode": "Resend code",
+  "authNameTitle": "How should we call you?",
+  "authNameSubtitle": "Add your name to finish setting up your account",
+  "authNameLabel": "Your name",
+  "authNameHint": "Anna",
+  "authFinish": "Finish",
+  "authErrorInvalidPhone": "Enter a valid phone number",
+  "authErrorInvalidCode": "The code is incorrect. Try again",
+  "authErrorRateLimited": "Too many attempts. Please wait a moment",
+  "authErrorEmptyName": "Please enter your name",
+  "authErrorNetwork": "Network error. Please try again",
+  "authErrorGeneric": "Something went wrong. Please try again",
+  "logout": "Log out"
 }

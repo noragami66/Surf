@@ -94,10 +94,7 @@ class _NavItem extends StatelessWidget {
           children: [
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 6,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
               decoration: BoxDecoration(
                 color: selected
                     ? Palette.ember.withValues(alpha: 0.15)
@@ -113,10 +110,9 @@ class _NavItem extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               destination.label,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: color,
-                fontSize: 11,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.labelLarge?.copyWith(color: color, fontSize: 11),
             ),
           ],
         ),

@@ -74,10 +74,7 @@ class _GlowOrb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ImageFiltered(
-      imageFilter: ImageFilter.blur(
-        sigmaX: blurSigma,
-        sigmaY: blurSigma,
-      ),
+      imageFilter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma),
       child: Container(
         width: size,
         height: size,
