@@ -12,13 +12,50 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Glina';
 
   @override
+  String get appTagline => 'Pottery workshop';
+
+  @override
   String get slotsTab => 'Slots';
 
   @override
   String get myBookingsTab => 'My bookings';
 
   @override
+  String get slotsSectionTitle => 'Schedule';
+
+  @override
   String get slotsEmptyTitle => 'No workshops available yet';
+
+  @override
+  String get slotsEmptySubtitle =>
+      'Check back later — the schedule updates regularly';
+
+  @override
+  String get slotsErrorTitle => 'Could not load';
+
+  @override
+  String get slotsErrorSubtitle => 'Check your connection and try again';
+
+  @override
+  String slotsSeatsAvailable(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count seats left',
+      one: '$count seat left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get myBookingsSubtitle => 'Your bookings and history';
+
+  @override
+  String get myBookingsEmptyTitle => 'No bookings yet';
+
+  @override
+  String get myBookingsEmptySubtitle =>
+      'Pick a workshop from the schedule to book a spot';
 
   @override
   String get loading => 'Loading…';

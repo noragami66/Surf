@@ -27,6 +27,7 @@ reference the same id.
 - (dev) Initial MVP analytics for «Глина»: customer brief, elicitation, user stories, FR/BR/NFR, use cases, prompts, task doc, git init ([PLATF-001](docs/tasks/task-00-mvp-analysis.md))
 - (dev) Architecture phase: data model, API contract, Flutter Clean Architecture plan ([PLATF-004](docs/tasks/task-01-architecture.md))
 - Flutter bootstrap: `app/` project, Clean Architecture skeleton, slots empty-state slice ([PLATF-009](docs/tasks/task-02-flutter-bootstrap.md))
+- Dark glassmorphism design system: palette, theme extensions, ambient background, glass widgets, slots screen redesign ([PLATF-010](app/))
 
 ### Changed
 

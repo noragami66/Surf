@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:glina/core/widgets/ambient_background.dart';
+import 'package:glina/core/widgets/glass_bottom_nav.dart';
 import 'package:glina/features/my_bookings/presentation/screens/my_bookings_screen.dart';
 import 'package:glina/features/slots/presentation/screens/slot_list_screen.dart';
+import 'package:glina/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -8,21 +11,31 @@ final GoRouter appRouter = GoRouter(
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
+        final l10n = AppLocalizations.of(context)!;
+
         return Scaffold(
-          body: navigationShell,
-          bottomNavigationBar: NavigationBar(
+          extendBody: true,
+          backgroundColor: Colors.transparent,
+          body: Stack(
+            fit: StackFit.expand,
+            children: [
+              const AmbientBackground(),
+              navigationShell,
+            ],
+          ),
+          bottomNavigationBar: GlassBottomNav(
             selectedIndex: navigationShell.currentIndex,
             onDestinationSelected: navigationShell.goBranch,
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Icons.calendar_month_outlined),
-                selectedIcon: Icon(Icons.calendar_month),
-                label: 'Slots',
+            destinations: [
+              GlassNavDestination(
+                icon: Icons.calendar_month_outlined,
+                selectedIcon: Icons.calendar_month,
+                label: l10n.slotsTab,
               ),
-              NavigationDestination(
-                icon: Icon(Icons.event_note_outlined),
-                selectedIcon: Icon(Icons.event_note),
-                label: 'Bookings',
+              GlassNavDestination(
+                icon: Icons.event_note_outlined,
+                selectedIcon: Icons.event_note,
+                label: l10n.myBookingsTab,
               ),
             ],
           ),

@@ -1,8 +1,24 @@
 {
   "@@locale": "ru",
   "appTitle": "Глина",
+  "appTagline": "Гончарная мастерская",
   "slotsTab": "Слоты",
   "myBookingsTab": "Мои записи",
+  "slotsSectionTitle": "Расписание",
   "slotsEmptyTitle": "Пока нет доступных занятий",
+  "slotsEmptySubtitle": "Загляните позже — расписание обновляется",
+  "slotsErrorTitle": "Не удалось загрузить",
+  "slotsErrorSubtitle": "Проверьте соединение и попробуйте снова",
+  "slotsSeatsAvailable": "{count, plural, one{{count} место} few{{count} места} many{{count} мест} other{{count} мест}}",
+  "@slotsSeatsAvailable": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "myBookingsSubtitle": "Ваши бронирования и история",
+  "myBookingsEmptyTitle": "Записей пока нет",
+  "myBookingsEmptySubtitle": "Выберите занятие в расписании и забронируйте место",
   "loading": "Загрузка…"
 }

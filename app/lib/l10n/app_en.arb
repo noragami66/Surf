@@ -4,11 +4,27 @@
   "@appTitle": {
     "description": "Application title"
   },
+  "appTagline": "Pottery workshop",
   "slotsTab": "Slots",
   "myBookingsTab": "My bookings",
+  "slotsSectionTitle": "Schedule",
   "slotsEmptyTitle": "No workshops available yet",
   "@slotsEmptyTitle": {
     "description": "Empty state when no slots in schedule"
   },
+  "slotsEmptySubtitle": "Check back later — the schedule updates regularly",
+  "slotsErrorTitle": "Could not load",
+  "slotsErrorSubtitle": "Check your connection and try again",
+  "slotsSeatsAvailable": "{count, plural, one{{count} seat left} other{{count} seats left}}",
+  "@slotsSeatsAvailable": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "myBookingsSubtitle": "Your bookings and history",
+  "myBookingsEmptyTitle": "No bookings yet",
+  "myBookingsEmptySubtitle": "Pick a workshop from the schedule to book a spot",
   "loading": "Loading…"
 }

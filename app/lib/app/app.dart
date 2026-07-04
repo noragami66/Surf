@@ -21,6 +21,7 @@ class GlinaApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Glina',
         theme: buildAppTheme(),
+        themeMode: ThemeMode.dark,
         locale: const Locale('ru'),
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [

@@ -104,6 +104,12 @@ abstract class AppLocalizations {
   /// **'Glina'**
   String get appTitle;
 
+  /// No description provided for @appTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Pottery workshop'**
+  String get appTagline;
+
   /// No description provided for @slotsTab.
   ///
   /// In en, this message translates to:
@@ -116,11 +122,59 @@ abstract class AppLocalizations {
   /// **'My bookings'**
   String get myBookingsTab;
 
+  /// No description provided for @slotsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule'**
+  String get slotsSectionTitle;
+
   /// Empty state when no slots in schedule
   ///
   /// In en, this message translates to:
   /// **'No workshops available yet'**
   String get slotsEmptyTitle;
+
+  /// No description provided for @slotsEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check back later — the schedule updates regularly'**
+  String get slotsEmptySubtitle;
+
+  /// No description provided for @slotsErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load'**
+  String get slotsErrorTitle;
+
+  /// No description provided for @slotsErrorSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection and try again'**
+  String get slotsErrorSubtitle;
+
+  /// No description provided for @slotsSeatsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} seat left} other{{count} seats left}}'**
+  String slotsSeatsAvailable(int count);
+
+  /// No description provided for @myBookingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your bookings and history'**
+  String get myBookingsSubtitle;
+
+  /// No description provided for @myBookingsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No bookings yet'**
+  String get myBookingsEmptyTitle;
+
+  /// No description provided for @myBookingsEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a workshop from the schedule to book a spot'**
+  String get myBookingsEmptySubtitle;
 
   /// No description provided for @loading.
   ///
