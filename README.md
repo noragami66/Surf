@@ -8,8 +8,10 @@
 | :-- | :-- |
 | 1. MVP / Анализ | ✅ Готово |
 | 2. Архитектура | ✅ Готово |
-| 3. Flutter-приложение | ✅ Bootstrap (PLATF-009) |
-| 4–6. Фичи (3) | ⏳ Следующий |
+| 3. Flutter-приложение | ✅ Bootstrap (PLATF-009) + UI (PLATF-010) |
+| 4. Auth (OTP) | ⏳ **Следующий** |
+| 5. Slots detail + Booking | ⏳ |
+| 6. My bookings + cancel | ⏳ |
 | 7. Тесты + баги (3) | ⏳ |
 
 > **Этап 7:** ручные test cases + **3 намеренных бага** — каждый с `.md`, prompt, шагами воспроизведения, fix и PLATF-XXX commit.
